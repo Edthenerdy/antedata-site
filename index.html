@@ -3,33 +3,83 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Antedata is AI-driven, new-generation risk software: AI calibrates your risk register from the outcomes of comparable past projects, runs serious Monte Carlo, and writes a defensible P50/P90 basis of estimate. Live demo runs entirely in your browser.">
+<meta name="description" content="Antedata is AI-driven, new-generation risk software: AI calibrates your risk register from the outcomes of comparable past projects, runs serious Monte Carlo, and writes a defensible P50/P90 basis of estimate.">
 <title>Antedata — AI-Driven Risk Software</title>
 <link rel="icon" href='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96"><circle cx="48" cy="48" r="42" fill="none" stroke="%231d3a5f" stroke-width="7"/><circle cx="34" cy="48" r="9" fill="%231d3a5f"/><rect x="56" y="26" width="7" height="44" rx="3.5" fill="%23b3781e"/></svg>'>
 <style>
-  .hero{max-width:880px;margin:0 auto;padding:64px 24px 48px;text-align:center;}
-  .hero .marque{display:block;margin:0 auto 14px;width:64px;height:64px;max-width:64px;}
+  :root{
+    color-scheme: light;
+    --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --grid:#e1e0d9; --ring:rgba(11,11,11,0.10);
+    --navy:#1d3a5f; --brass:#b3781e; --blue:#2a78d6;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:where(:not([data-theme="light"])){
+      color-scheme: dark;
+      --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+      --grid:#2c2c2a; --ring:rgba(255,255,255,0.10);
+      --navy:#8db0d8; --brass:#cf9240; --blue:#3987e5;
+    }
+  }
+  :root[data-theme="dark"]{
+    color-scheme: dark;
+    --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+    --grid:#2c2c2a; --ring:rgba(255,255,255,0.10);
+    --navy:#8db0d8; --brass:#cf9240; --blue:#3987e5;
+  }
+  :root[data-theme="light"]{
+    color-scheme: light;
+    --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+    --grid:#e1e0d9; --ring:rgba(11,11,11,0.10);
+    --navy:#1d3a5f; --brass:#b3781e; --blue:#2a78d6;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--page);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;}
+  a:focus,button:focus,input:focus,select:focus{outline:2px solid var(--navy);outline-offset:1px;}
+
+  .hero{max-width:880px;margin:0 auto;padding:64px 24px 40px;text-align:center;}
+  .hero .marque{display:block;margin:0 auto 14px;width:64px;height:64px;}
   .hero .mark{font-family:Georgia,'Times New Roman',serif;font-size:38px;font-weight:600;letter-spacing:0.04em;color:var(--navy);}
   .hero .kicker{font-style:italic;font-size:15px;color:var(--navy);margin-top:6px;font-family:Georgia,serif;}
   .hero h1{font-size:clamp(22px,3.4vw,32px);font-weight:650;line-height:1.25;margin:18px 0 10px;text-wrap:balance;}
   .hero p.lede{font-size:16px;color:var(--ink-2);max-width:620px;margin:0 auto 26px;line-height:1.55;}
-  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:8px;}
-  .cta{display:inline-block;font-size:15px;font-weight:600;padding:11px 22px;border-radius:6px;text-decoration:none;}
+  .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .cta{display:inline-block;font-size:15px;font-weight:600;padding:11px 22px;border-radius:6px;text-decoration:none;cursor:pointer;border:none;font-family:inherit;}
   .cta.primary{background:var(--navy);color:#fff;}
-  .cta.ghost{color:var(--navy);border:1px solid var(--navy);}
+  :root:not([data-theme="light"]) .cta.primary{color:#0d0d0d;}
+  @media (prefers-color-scheme: light){ .cta.primary{color:#fff;} }
+  .cta.ghost{color:var(--navy);border:1px solid var(--navy);background:transparent;}
+
   .evidence{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:920px;margin:36px auto 0;padding:0 24px;text-align:left;}
   @media(max-width:760px){.evidence{grid-template-columns:1fr;}}
   .ev-card{background:var(--surface);border:1px solid var(--ring);border-radius:6px;padding:16px 18px;}
   .ev-card .big{font-size:24px;font-weight:700;color:var(--navy);}
   .ev-card p{font-size:13px;color:var(--ink-2);margin:6px 0 0;line-height:1.5;}
   .ev-card .src{font-size:11px;color:var(--muted);display:block;margin-top:8px;}
-  .demo-note{text-align:center;font-size:13.5px;color:var(--ink-2);max-width:640px;margin:48px auto 6px;padding:0 24px;}
-  .demo-note b{color:var(--ink);}
-  footer.site{max-width:1280px;margin:24px auto 0;padding:20px 24px 48px;border-top:1px solid var(--grid);font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7;}
-  footer.site a{color:var(--navy);}
+
   .section{max-width:980px;margin:56px auto 0;padding:0 24px;}
   .section h2{font-family:Georgia,serif;font-size:24px;font-weight:600;color:var(--navy);text-align:center;margin:0 0 6px;}
-  .section .s-sub{text-align:center;font-size:13.5px;color:var(--ink-2);margin:0 0 22px;}
+  .section .s-sub{text-align:center;font-size:13.5px;color:var(--ink-2);margin:0 auto 22px;max-width:640px;}
+
+  .calc{max-width:760px;margin:0 auto;background:var(--surface);border:1px solid var(--ring);border-radius:10px;padding:24px;}
+  .calc-form{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:18px;}
+  @media(max-width:560px){.calc-form{grid-template-columns:1fr;}}
+  .field label{display:block;font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:4px;}
+  .field select,.field input{width:100%;font:inherit;font-size:15px;color:var(--ink);background:var(--page);border:1px solid var(--ring);border-radius:5px;padding:9px 10px;}
+  .field input{text-align:right;font-variant-numeric:tabular-nums;}
+  .calc-res{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:14px;}
+  @media(max-width:560px){.calc-res{grid-template-columns:1fr;}}
+  .r-tile{border:1px solid var(--ring);border-radius:6px;padding:12px 14px;text-align:center;}
+  .r-tile.mid{border:2px solid var(--navy);}
+  .r-tile .l{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  .r-tile .v{font-size:22px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;margin-top:2px;}
+  .r-tile .d{font-size:11px;color:var(--muted);margin-top:2px;font-variant-numeric:tabular-nums;}
+  .calc-read{font-size:13.5px;color:var(--ink-2);line-height:1.6;margin:0 0 10px;}
+  .calc-cite{font-size:11px;color:var(--muted);line-height:1.6;}
+  .calc-cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;align-items:center;}
+  .calc-note{font-size:12px;color:var(--ink-2);}
+  .curve{margin:6px 0 2px;}
+
   .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
   @media(max-width:820px){.tiers{grid-template-columns:1fr;}}
   .tier{background:var(--surface);border:1px solid var(--ring);border-radius:8px;padding:20px;display:flex;flex-direction:column;}
@@ -39,171 +89,23 @@
   .tier .per{font-size:11.5px;color:var(--muted);margin-bottom:12px;}
   .tier ul{margin:0 0 16px;padding-left:18px;font-size:13px;color:var(--ink-2);line-height:1.7;flex:1;}
   .tier .cta{text-align:center;}
+  .tier .no{color:var(--muted);}
+
   .contact-card{background:var(--surface);border:1px solid var(--ring);border-radius:8px;padding:24px;text-align:center;max-width:560px;margin:0 auto;}
   .contact-card p{font-size:14px;color:var(--ink-2);margin:0 0 16px;line-height:1.6;}
   .disclaimer{max-width:860px;margin:48px auto 0;padding:0 24px;font-size:11.5px;color:var(--muted);line-height:1.7;}
   .disclaimer b{color:var(--ink-2);}
+  footer.site{max-width:1280px;margin:24px auto 0;padding:20px 24px 48px;border-top:1px solid var(--grid);font-size:12.5px;color:var(--muted);text-align:center;line-height:1.7;}
+  footer.site a{color:var(--navy);}
 </style>
-<style>
-  :root{
-    color-scheme: light;
-    --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
-    --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,0.10);
-    --blue:#2a78d6; --blue-soft:#9ec5f4; --blue-deep:#1c5cab;
-    --navy:#1d3a5f;
-    --ai:#b3781e; --ai-wash:rgba(179,120,30,0.08);
-    --good:#006300; --crit:#d03b3b;
-    --radius:6px;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:where(:not([data-theme="light"])){
-      color-scheme: dark;
-      --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
-      --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,0.10);
-      --blue:#3987e5; --blue-soft:#1c5cab; --blue-deep:#86b6ef;
-      --navy:#8db0d8;
-      --ai:#cf9240; --ai-wash:rgba(207,146,64,0.12);
-      --good:#0ca30c; --crit:#e66767;
-    }
-  }
-  :root[data-theme="dark"]{
-    color-scheme: dark;
-    --page:#0d0d0d; --surface:#1a1a19; --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
-    --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,0.10);
-    --blue:#3987e5; --blue-soft:#1c5cab; --blue-deep:#86b6ef;
-    --navy:#8db0d8;
-    --ai:#cf9240; --ai-wash:rgba(207,146,64,0.12);
-    --good:#0ca30c; --crit:#e66767;
-  }
-  :root[data-theme="light"]{
-    color-scheme: light;
-    --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
-    --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,0.10);
-    --blue:#2a78d6; --blue-soft:#9ec5f4; --blue-deep:#1c5cab;
-    --navy:#1d3a5f;
-    --ai:#b3781e; --ai-wash:rgba(179,120,30,0.08);
-    --good:#006300; --crit:#d03b3b;
-  }
-  *{box-sizing:border-box}
-  body{background:var(--page); color:var(--ink); font-family:system-ui,-apple-system,"Segoe UI",sans-serif; margin:0; line-height:1.45;}
-  .wrap{max-width:1280px; margin:0 auto; padding:20px 24px 64px; display:flex; flex-direction:column; gap:16px;}
-
-  header.app{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap;}
-  .wordmark{font-family:Georgia,'Times New Roman',serif; font-size:23px; font-weight:600; letter-spacing:0.04em; color:var(--navy);}
-  .wordmark .dot{color:var(--ai);}
-  .tagline{color:var(--ink-2); font-size:13.5px;}
-  .proto-badge{margin-left:auto; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-2); border:1px solid var(--ring); border-radius:999px; padding:3px 10px;}
-
-  .gov{font-size:12.5px; color:var(--ink-2); border:1px solid var(--ring); border-left:3px solid var(--blue); border-radius:var(--radius); background:var(--surface); padding:8px 12px;}
-  .gov b{color:var(--ink);}
-
-  .eyebrow{font-size:11px; letter-spacing:0.09em; text-transform:uppercase; color:var(--muted); font-weight:600;}
-
-  .ctx{display:grid; grid-template-columns:2fr 1.2fr 1.2fr 1fr 1fr 1.1fr auto; gap:12px; align-items:end;
-    background:var(--surface); border:1px solid var(--ring); border-radius:var(--radius); padding:14px 16px;}
-  @media (max-width:900px){ .ctx{grid-template-columns:1fr 1fr;} }
-  .field label{display:block; font-size:11px; letter-spacing:0.07em; text-transform:uppercase; color:var(--muted); margin-bottom:4px; font-weight:600;}
-  .field input,.field select{width:100%; font:inherit; font-size:13.5px; color:var(--ink); background:var(--page);
-    border:1px solid var(--ring); border-radius:4px; padding:6px 8px;}
-  .field input[type=number]{text-align:right; font-variant-numeric:tabular-nums;}
-  input:focus,select:focus,button:focus,textarea:focus{outline:2px solid var(--blue); outline-offset:1px;}
-  button{font:inherit; cursor:pointer; border-radius:4px; border:1px solid var(--ring); background:var(--surface); color:var(--ink); padding:7px 12px; font-size:13px;}
-  button.primary{background:var(--blue); border-color:var(--blue); color:#fff; font-weight:600;}
-  button.ai-btn{color:var(--ai); border-color:var(--ai); background:transparent; font-weight:600;}
-  button:hover{filter:brightness(1.04);}
-  button:disabled{opacity:0.45; cursor:not-allowed;}
-
-  .card{background:var(--surface); border:1px solid var(--ring); border-radius:var(--radius); padding:14px 16px;}
-  .card h2{font-size:13px; letter-spacing:0.08em; text-transform:uppercase; margin:0 0 10px; font-weight:700; color:var(--ink-2);}
-  .card .sub{font-size:12.5px; color:var(--muted); margin:-6px 0 10px;}
-
-  .reg-toolbar{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:10px;}
-  .reg-toolbar input[type=search]{font:inherit; font-size:13px; color:var(--ink); background:var(--page); border:1px solid var(--ring); border-radius:4px; padding:6px 9px; width:220px;}
-  .reg-toolbar select{font:inherit; font-size:13px; color:var(--ink); background:var(--page); border:1px solid var(--ring); border-radius:4px; padding:6px 8px;}
-  .reg-toolbar .count{font-size:12px; color:var(--muted); margin-left:auto; font-variant-numeric:tabular-nums;}
-  .reg-scroll{max-height:440px; overflow:auto; border:1px solid var(--grid); border-radius:4px;}
-  table.reg{width:100%; border-collapse:collapse; font-size:12.5px; font-variant-numeric:tabular-nums; min-width:940px;}
-  table.reg th{position:sticky; top:0; z-index:2; background:var(--surface); text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); font-weight:600; padding:7px 8px; border-bottom:1px solid var(--grid); white-space:nowrap;}
-  table.reg td{padding:3px 5px; border-bottom:1px solid var(--grid);}
-  table.reg td.idx{color:var(--muted); text-align:right; width:34px; font-size:11px;}
-  table.reg input,table.reg select{font:inherit; font-size:12.5px; color:var(--ink); background:transparent; border:1px solid transparent; border-radius:3px; padding:3px 5px; width:100%;}
-  table.reg input:hover,table.reg select:hover{border-color:var(--ring); background:var(--page);}
-  table.reg input:focus,table.reg select:focus{border-color:var(--blue); background:var(--page);}
-  table.reg input.num{text-align:right; width:74px;}
-  table.reg td.name-cell{min-width:230px;}
-  .cal-mark{color:var(--ai); font-weight:700; margin-right:2px;}
-  table.reg button.mini{padding:2px 8px; font-size:12px; border:none; background:transparent;}
-  table.reg button.mini.cal{color:var(--ai); font-weight:700;}
-  table.reg button.mini.del{color:var(--muted);}
-  table.reg button.mini:hover{background:var(--page); filter:none;}
-
-  dialog{border:1px solid var(--ring); border-radius:var(--radius); background:var(--surface); color:var(--ink); padding:18px 20px; max-width:640px; width:92vw;}
-  dialog::backdrop{background:rgba(0,0,0,0.35);}
-  dialog h3{margin:0 0 4px; font-size:15px;}
-  dialog .sub{font-size:12.5px; color:var(--muted); margin:0 0 12px;}
-  dialog textarea{width:100%; height:120px; font:12px ui-monospace,Consolas,monospace; color:var(--ink); background:var(--page); border:1px solid var(--ring); border-radius:4px; padding:8px; resize:vertical;}
-  .imp-row{display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin:10px 0;}
-  .imp-msg{font-size:12.5px; margin-top:10px;}
-  .imp-msg ul{margin:6px 0 0 18px; padding:0; color:var(--ink-2);}
-
-  .tiles{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
-  @media (max-width:720px){ .tiles{grid-template-columns:repeat(2,1fr);} }
-  .tile{background:var(--surface); border:1px solid var(--ring); border-radius:var(--radius); padding:12px 14px;}
-  .tile .v{font-size:26px; font-weight:700; margin-top:2px;}
-  .tile .d{font-size:12px; color:var(--muted); margin-top:2px;}
-  .tile.hero{border-left:3px solid var(--navy);}
-  .tile.hero .v{color:var(--navy);}
-
-  .charts{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  @media (max-width:900px){ .charts{grid-template-columns:1fr;} }
-  .chart-card{position:relative;}
-  .wide{grid-column:1/-1;}
-  svg{display:block; width:100%; height:auto;}
-  .tt{position:absolute; pointer-events:none; background:var(--ink); color:var(--page); font-size:12px; padding:5px 8px; border-radius:4px; white-space:nowrap; transform:translate(-50%,-130%); opacity:0; transition:opacity .1s; font-variant-numeric:tabular-nums; z-index:5;}
-  @media (prefers-reduced-motion: reduce){ .tt{transition:none;} }
-  .chart-note{font-size:12px; color:var(--muted); margin-top:6px;}
-
-  .ai-panel{border:1px solid var(--ai); background:var(--ai-wash);}
-  .ai-panel h2{color:var(--ai);}
-  .ai-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
-  @media (max-width:900px){ .ai-grid{grid-template-columns:1fr;} }
-  .ai-sugg{font-size:13px; background:var(--surface); border:1px solid var(--ring); border-radius:4px; padding:10px 12px;}
-  .ai-sugg .narrative{margin:6px 0 10px; color:var(--ink-2);}
-  .src-chip{font-size:10.5px; letter-spacing:0.05em; text-transform:uppercase; padding:2px 7px; border-radius:999px; border:1px solid var(--ai); color:var(--ai); margin-left:6px; white-space:nowrap;}
-  .cmp{width:100%; border-collapse:collapse; font-size:12.5px; font-variant-numeric:tabular-nums; margin-bottom:10px;}
-  .cmp th{text-align:right; font-size:10.5px; text-transform:uppercase; letter-spacing:0.05em; color:var(--muted); font-weight:600; padding:3px 6px; border-bottom:1px solid var(--grid);}
-  .cmp th:first-child,.cmp td:first-child{text-align:left;}
-  .cmp td{text-align:right; padding:4px 6px;}
-  .cmp tr.sugg td{color:var(--ai); font-weight:650;}
-  .delta{font-size:12.5px; margin:4px 0 10px;}
-  .delta b{font-variant-numeric:tabular-nums;}
-
-  .sources{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  @media (max-width:900px){ .sources{grid-template-columns:1fr;} }
-  .tier-head{display:flex; align-items:center; gap:8px; margin-bottom:8px;}
-  .tier-badge{font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; padding:2px 8px; border-radius:999px; font-weight:650;}
-  .tier-badge.own{color:var(--blue-deep); border:1px solid var(--blue);}
-  .tier-badge.ind{color:var(--ink-2); border:1px solid var(--ring);}
-  table.ref{width:100%; border-collapse:collapse; font-size:12.5px; font-variant-numeric:tabular-nums;}
-  table.ref th{text-align:left; font-size:10.5px; text-transform:uppercase; letter-spacing:0.06em; color:var(--muted); font-weight:600; padding:5px 7px; border-bottom:1px solid var(--grid);}
-  table.ref td{padding:6px 7px; border-bottom:1px solid var(--grid);}
-  table.ref th.num,table.ref td.num{text-align:right;}
-  .sim-hi{color:var(--blue-deep); font-weight:650;}
-  .over-pos{color:var(--crit);}
-  .tier-note{font-size:12px; color:var(--muted); margin-top:8px;}
-
-  .foot{font-size:13px; color:var(--ink-2); border-top:1px solid var(--grid); padding-top:14px;}
-  .foot b{color:var(--ink);}
-  .scroll-x{overflow-x:auto;}
-</style>
-
 </head>
 <body>
+
 <section class="hero">
-  <svg class="marque" width="72" height="72" viewBox="0 0 96 96" aria-hidden="true">
+  <svg class="marque" viewBox="0 0 96 96" aria-hidden="true">
     <circle cx="48" cy="48" r="42" fill="none" stroke="var(--navy)" stroke-width="5"/>
     <circle cx="34" cy="48" r="8" fill="var(--navy)"/>
-    <rect x="56" y="26" width="6" height="44" rx="3" fill="var(--ai)"/>
+    <rect x="56" y="26" width="6" height="44" rx="3" fill="var(--brass)"/>
   </svg>
   <div class="mark">Antedata</div>
   <div class="kicker">Hindsight, in advance.</div>
@@ -212,7 +114,7 @@
     register from the outcomes of comparable past projects, runs serious Monte Carlo, and writes
     a defensible basis of estimate — a P50/P90 you can stand behind, with every input attributed.</p>
   <div class="cta-row">
-    <a class="cta primary" href="#demo">Try the live demo</a>
+    <a class="cta primary" href="#calculator">See what the evidence says</a>
     <a class="cta ghost" href="#pricing">Pricing</a>
     <a class="cta ghost" href="#contact">Contact</a>
   </div>
@@ -228,941 +130,66 @@
       <span class="src">NSW TPG24-29 · INSW Cost Control Framework · DITRDCA GN3A</span></div>
   </div>
 </section>
-<p class="demo-note"><b>Live demo below — it runs entirely in your browser.</b> Import your own
-  register from Excel if you like: nothing you load leaves your machine. Reference-class and
-  delivery-history data shown are samples; in the product, calibration runs on your
-  organisation's own closeouts inside your tenancy.</p>
-<div class="wrap" id="demo">
-  <header class="app">
-    <div class="wordmark">Antedata<span class="dot">.</span></div>
-    <div class="tagline">Reference-class risk engine — priced on the data that came before. Yours.</div>
-    <div class="proto-badge">Live demo · sample reference data</div>
-  </header>
 
-  <div class="gov">🔒 <b>Client data boundary.</b> Named projects appear only from <b>your organisation's connected systems</b> and never leave your tenancy.
-    Everything cross-client ships as <b>anonymised industry aggregates</b> — medians and percentiles with sample sizes, never identifiable projects.</div>
-
-  <div class="ctx">
-    <div class="field"><label for="pname">Project</label><input id="pname" value="Core systems modernisation"></div>
-    <div class="field"><label for="psector">Sector</label>
-      <select id="psector"><option>Government</option><option>Financial services</option><option>Resources</option><option>Health</option></select></div>
-    <div class="field"><label for="ptype">Delivery type</label>
-      <select id="ptype"><option>ERP implementation</option><option>Data platform</option><option>Cloud migration</option><option>Custom build</option><option>Road / highway</option><option>Rail / transit</option><option>Buildings / precinct</option></select></div>
-    <div class="field"><label for="pbase">Base estimate ($M)</label><input id="pbase" type="number" step="0.1" min="0.1" value="12.0"></div>
-    <div class="field"><label for="iters">Iterations</label>
-      <select id="iters"><option>5000</option><option selected>10000</option><option>25000</option><option>50000</option></select></div>
-    <div class="field"><label for="corr" title="Two-level Gaussian copula (Iman–Conover): a systemic project driver correlates all risks at half this value; same-category risks correlate at the full value">Correlation</label>
-      <select id="corr"><option value="0">None (0)</option><option value="0.2">Low (0.2)</option><option value="0.4" selected>Moderate (0.4)</option><option value="0.6">High (0.6)</option></select></div>
-    <button class="primary" id="rerun">Re-run</button>
-  </div>
-
-  <div class="card">
-    <h2>Risk register</h2>
-    <div class="reg-toolbar">
-      <input type="search" id="reg-search" placeholder="Search risks…">
-      <select id="reg-filter"><option value="">All categories</option></select>
-      <button id="add-risk">+ Add risk</button>
-      <button id="open-import">⬆ Import (Excel / CSV / paste)</button>
-      <button id="dl-template">⬇ Template</button>
-      <button id="export-xlsx">⬇ Export .xlsx</button>
-      <button id="load-sample">Load sample register</button>
-      <button class="ai-btn" id="cal-all">✦ Calibrate all</button>
-      <span class="count" id="dl-msg" style="margin-left:0"></span>
-      <span class="count" id="reg-count"></span>
+<section class="section" id="calculator">
+  <h2>What does the evidence say about a project like yours?</h2>
+  <p class="s-sub">Pick a delivery type and a base estimate. Published research on completed
+    projects suggests an indicative funding range — a flavour of the method, not your number.</p>
+  <div class="calc">
+    <div class="calc-form">
+      <div class="field"><label for="ctype">Delivery type</label>
+        <select id="ctype">
+          <option value="erp">ERP / core systems implementation</option>
+          <option value="it">IT / digital project (general)</option>
+          <option value="road">Road / highway</option>
+          <option value="rail">Rail / transit</option>
+          <option value="bld">Buildings / precinct</option>
+        </select></div>
+      <div class="field"><label for="cbase">Base estimate ($M)</label>
+        <input id="cbase" type="number" min="1" step="1" value="50" inputmode="decimal"></div>
     </div>
-    <div class="reg-scroll"><table class="reg">
-      <thead><tr><th></th><th>Risk</th><th>Category</th><th>Kind</th><th>Dist</th>
-        <th style="text-align:right">Min $M</th><th style="text-align:right">Likely $M</th><th style="text-align:right">Max $M</th>
-        <th style="text-align:right">P(occur)</th><th></th><th></th></tr></thead>
-      <tbody id="reg-body"></tbody>
-    </table></div>
-  </div>
-
-  <div class="card ai-panel" id="ai-panel" hidden>
-    <h2>✦ AI calibration</h2>
-    <p class="sub" id="ai-note"></p>
-    <div class="ai-grid" id="ai-body"></div>
-  </div>
-
-  <div class="tiles" id="tiles"></div>
-
-  <div class="charts">
-    <div class="card chart-card wide" id="scurve-card">
-      <h2>Cost S-curve — cumulative probability</h2>
-      <div id="scurve"></div><div class="tt" id="tt-s"></div>
+    <div class="calc-res">
+      <div class="r-tile"><div class="l">P50 — median</div><div class="v" id="r50">–</div><div class="d" id="d50"></div></div>
+      <div class="r-tile mid"><div class="l">P80</div><div class="v" id="r80">–</div><div class="d" id="d80"></div></div>
+      <div class="r-tile"><div class="l">P90</div><div class="v" id="r90">–</div><div class="d" id="d90"></div></div>
     </div>
-    <div class="card chart-card" id="hist-card">
-      <h2>Outcome distribution</h2>
-      <div id="hist"></div><div class="tt" id="tt-h"></div>
-    </div>
-    <div class="card chart-card" id="torn-card">
-      <h2>Sensitivity — correlation with total</h2>
-      <div id="tornado"></div><div class="tt" id="tt-t"></div>
-      <div class="chart-note" id="torn-note"></div>
+    <svg class="curve" id="curve" viewBox="0 0 640 120" role="img" aria-label="Indicative cumulative cost curve"></svg>
+    <p class="calc-read" id="read"></p>
+    <p class="calc-cite" id="cite"></p>
+    <div class="calc-cta">
+      <a class="cta primary" href="#contact">Get your own number — request access</a>
+      <span class="calc-note">The full product calibrates from <b>your organisation's delivery
+      history</b>, risk by risk, and produces the auditable basis of estimate and QRA report.</span>
     </div>
   </div>
+</section>
 
-  <div class="sources">
-    <div class="card">
-      <div class="tier-head"><h2 style="margin:0">Your delivery history</h2><span class="tier-badge own">Inside your tenancy</span></div>
-      <p class="sub">Closest completed projects from your organisation's connected systems (demo tenant — in production this reads your PPM / finance records; names are visible because the data is yours).</p>
-      <div class="scroll-x"><table class="ref" id="org-table"></table></div>
-      <div class="tier-note" id="org-note"></div>
-    </div>
-    <div class="card">
-      <div class="tier-head"><h2 style="margin:0">Industry benchmark</h2><span class="tier-badge ind">Anonymised aggregates</span></div>
-      <p class="sub" id="ind-sub"></p>
-      <div class="scroll-x"><table class="ref" id="ind-table"></table></div>
-      <div class="tier-note">Illustrative decomposition (sample data). Published research reports whole-of-project outturns only — see the evidence below.
-        Category-grain insight comes from your organisation's own closeout records — which is why Antedata calibrates from your delivery history first.</div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="tier-head"><h2 style="margin:0">Published evidence — what projects actually cost</h2><span class="tier-badge ind">Cited research</span></div>
-    <p class="sub" id="ev-headline"></p>
-    <div class="scroll-x"><table class="ref" id="ev-table"></table></div>
-    <div class="tier-note">Baselines differ by source (first-announced cost vs approved budget) and several figures are from secondary summaries of paywalled primaries — treat as directional.
-      The structural finding: the <b>median</b> IT overrun is ≈0%, but the mean is +27% to +80% because the tail follows a power law (α ≈ 2.1–2.3) — roughly one project in six becomes a "black swan" averaging +200%.
-      Single-point contingency cannot price that tail; simulating it against a reference class is the point of this product.</div>
-  </div>
-
-  <div class="foot" id="foot">
-    <b>Why Antedata:</b> inputs calibrated from evidence — your organisation's own delivery history first, cited published research second —
-    with every suggestion attributed and every acceptance audited, so the basis of estimate writes itself.
-    The simulation is serious where it counts: correlation between risks (two-level Gaussian copula, Iman–Conover — marginals preserved,
-    tails widen honestly), Latin Hypercube sampling, reproducible seeded runs with convergence reporting.
-    In the full product your data stays inside your tenancy, reviewers get a free read-only link, and the QRA report exports ready to file.
-  </div>
-</div>
-
-<dialog id="import-dlg">
-  <h3>Import risk register</h3>
-  <p class="sub">Accepts .xlsx (first worksheet), .csv, or rows pasted straight from Excel. First row must be headers —
-    recognised: Risk / Category / Type / Distribution / Min / Most Likely / Max / Probability (order doesn't matter; extra columns ignored).</p>
-  <div class="imp-row">
-    <input type="file" id="imp-file" accept=".xlsx,.csv,.txt,.tsv">
-  </div>
-  <textarea id="imp-paste" placeholder="…or copy a range in Excel (including the header row) and paste it here"></textarea>
-  <div class="imp-row">
-    <label style="font-size:13px"><input type="radio" name="imp-mode" value="replace" checked> Replace register</label>
-    <label style="font-size:13px"><input type="radio" name="imp-mode" value="append"> Append</label>
-    <span style="flex:1"></span>
-    <button id="imp-go" class="primary">Import</button>
-    <button id="imp-close">Close</button>
-  </div>
-  <div class="imp-msg" id="imp-msg"></div>
-</dialog>
-
-<script>
-"use strict";
-/* ================= PURE LOGIC (no DOM above the ==== DOM ==== marker) ================= */
-
-/* ---------- RNG & samplers ---------- */
-function mulberry32(seed){return function(){seed|=0;seed=seed+0x6D2B79F5|0;let t=Math.imul(seed^seed>>>15,1|seed);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
-function randn(rng){let u=0,v=0;while(u===0)u=rng();while(v===0)v=rng();return Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*v);}
-function gammaS(rng,k){if(k<1){return gammaS(rng,k+1)*Math.pow(rng()||1e-12,1/k);}
-  const d=k-1/3,c=1/Math.sqrt(9*d);
-  for(;;){let x,v;do{x=randn(rng);v=1+c*x;}while(v<=0);v=v*v*v;const u=rng();
-    if(u<1-0.0331*x*x*x*x)return d*v;
-    if(Math.log(u)<0.5*x*x+d*(1-v+Math.log(v)))return d*v;}}
-function betaS(rng,a,b){const x=gammaS(rng,a);return x/(x+gammaS(rng,b));}
-function pertS(rng,min,mode,max){if(max<=min)return min;
-  const a=1+4*(mode-min)/(max-min),b=1+4*(max-mode)/(max-min);
-  return min+betaS(rng,a,b)*(max-min);}
-function triS(rng,min,mode,max){if(max<=min)return min;const u=rng(),f=(mode-min)/(max-min);
-  return u<f?min+Math.sqrt(u*(max-min)*(mode-min)):max-Math.sqrt((1-u)*(max-min)*(max-mode));}
-function uniS(rng,min,max){return min+rng()*(max-min);}
-function normS(rng,min,mode,max){const sd=(max-min)/6.4;return mode+sd*randn(rng);}
-function lognS(rng,min,mode,max){const med=Math.max(mode,1e-6);
-  const sig=Math.max(0.05,Math.log(Math.max(max,med*1.05)/med)/1.6449);
-  return min>0? min+(med-min)*Math.exp(sig*randn(rng)) : med*Math.exp(sig*randn(rng));}
-const SAMPLERS={pert:pertS,tri:triS,uniform:(r,a,m,b)=>uniS(r,a,b),normal:normS,lognormal:lognS};
-
-/* ---------- Model state ---------- */
-const CATS={scope:"Scope growth",vendor:"Vendor & rates",data:"Data migration",integration:"Integration rework",people:"Key-person risk",schedule:"Schedule extension",
- site:"Latent site conditions",utilities:"Utilities & services",approvals:"Approvals & environment",land:"Land & property",weather:"Weather & flooding",other:"Other"};
-let nextId=100;
-let risks=[
- {id:1,name:"Requirements growth / scope creep",cat:"scope",kind:"continuous",dist:"pert",min:0.10,mode:0.35,max:1.20,prob:1,cal:false},
- {id:2,name:"Vendor & contractor rate escalation",cat:"vendor",kind:"continuous",dist:"pert",min:0.00,mode:0.25,max:0.70,prob:1,cal:false},
- {id:3,name:"Data migration & quality remediation",cat:"data",kind:"continuous",dist:"tri",min:0.10,mode:0.40,max:1.50,prob:1,cal:false},
- {id:4,name:"Integration rework — legacy interfaces",cat:"integration",kind:"event",dist:"tri",min:0.30,mode:0.80,max:2.00,prob:0.35,cal:false},
- {id:5,name:"Key resource attrition & re-onboarding",cat:"people",kind:"event",dist:"tri",min:0.15,mode:0.40,max:0.90,prob:0.25,cal:false},
- {id:6,name:"Schedule extension — run-rate burn",cat:"schedule",kind:"continuous",dist:"lognormal",min:0.10,mode:0.45,max:1.80,prob:1,cal:false},
-];
-
-/* Tier 1 — the client's OWN delivery history (demo tenant data; named because it belongs to the client) */
-const ORG_HISTORY=[
- {name:"State revenue ERP replacement",sector:"Government",type:"ERP implementation",size:18.5,overrun:31,cats:{scope:9.5,vendor:3.8,data:7.2,integration:6.5,people:1.8,schedule:5.4}},
- {name:"Utilities billing ERP consolidation",sector:"Government",type:"ERP implementation",size:9.2,overrun:24,cats:{scope:7.1,vendor:2.9,data:5.8,integration:4.2,people:0.9,schedule:4.6}},
- {name:"Health payroll remediation",sector:"Health",type:"ERP implementation",size:26.0,overrun:58,cats:{scope:16.4,vendor:6.1,data:11.3,integration:12.8,people:3.2,schedule:9.7}},
- {name:"Bank general-ledger modernisation",sector:"Financial services",type:"ERP implementation",size:14.8,overrun:19,cats:{scope:6.2,vendor:2.4,data:4.9,integration:3.1,people:1.1,schedule:2.8}},
- {name:"Mining ERP + asset management",sector:"Resources",type:"ERP implementation",size:22.4,overrun:27,cats:{scope:8.8,vendor:4.5,data:6.0,integration:5.5,people:2.0,schedule:4.1}},
- {name:"Agency case-management rebuild",sector:"Government",type:"Custom build",size:11.0,overrun:35,cats:{scope:13.2,vendor:3.4,data:4.1,integration:7.6,people:2.6,schedule:6.9}},
- {name:"Whole-of-gov data platform",sector:"Government",type:"Data platform",size:8.4,overrun:22,cats:{scope:6.8,vendor:2.1,data:8.9,integration:3.8,people:1.4,schedule:3.3}},
- {name:"Insurer core migration to cloud",sector:"Financial services",type:"Cloud migration",size:16.2,overrun:14,cats:{scope:3.9,vendor:2.8,data:3.6,integration:4.4,people:0.7,schedule:2.2}},
- {name:"Grants administration ERP",sector:"Government",type:"ERP implementation",size:6.8,overrun:17,cats:{scope:5.4,vendor:1.9,data:3.7,integration:2.6,people:0.8,schedule:2.9}},
- {name:"Hospital scheduling platform",sector:"Health",type:"Custom build",size:7.5,overrun:41,cats:{scope:14.6,vendor:4.2,data:5.5,integration:8.3,people:3.8,schedule:8.1}},
- {name:"Resources trading data platform",sector:"Resources",type:"Data platform",size:12.6,overrun:12,cats:{scope:4.1,vendor:1.6,data:5.2,integration:2.4,people:1.2,schedule:1.8}},
- {name:"Council ERP + payroll uplift",sector:"Government",type:"ERP implementation",size:13.9,overrun:29,cats:{scope:8.2,vendor:3.6,data:6.6,integration:5.9,people:1.5,schedule:5.0}},
- {name:"Pacific corridor duplication (Stage 2)",sector:"Government",type:"Road / highway",size:118,overrun:24,cats:{scope:3.8,vendor:2.6,schedule:3.1,site:6.4,utilities:3.2,approvals:1.6,land:2.1,weather:2.8}},
- {name:"Urban intersection grade separations",sector:"Government",type:"Road / highway",size:46,overrun:31,cats:{scope:5.2,vendor:3.1,schedule:4.4,site:8.1,utilities:5.6,approvals:2.2,land:3.0,weather:2.4}},
- {name:"Regional bridge replacement program",sector:"Government",type:"Road / highway",size:38,overrun:12,cats:{scope:1.9,vendor:1.8,schedule:1.6,site:3.4,utilities:1.2,approvals:0.9,land:0.6,weather:1.7}},
- {name:"Arterial smart-motorway upgrade",sector:"Government",type:"Road / highway",size:82,overrun:19,cats:{scope:3.1,vendor:2.4,schedule:2.8,site:4.6,utilities:3.8,approvals:1.4,land:1.2,weather:1.9}},
- {name:"Light rail extension (7 stops)",sector:"Government",type:"Rail / transit",size:310,overrun:47,cats:{scope:7.4,vendor:5.2,schedule:8.6,site:9.8,utilities:11.3,approvals:3.1,land:4.2,weather:2.6}},
- {name:"Suburban rail signalling renewal",sector:"Government",type:"Rail / transit",size:140,overrun:33,cats:{scope:6.1,vendor:4.4,schedule:7.2,site:4.9,utilities:5.0,approvals:2.0,land:0.8,weather:1.4}},
- {name:"Station accessibility upgrades (12 sites)",sector:"Government",type:"Rail / transit",size:64,overrun:28,cats:{scope:5.5,vendor:3.3,schedule:5.1,site:6.6,utilities:4.1,approvals:2.4,land:1.1,weather:1.8}},
- {name:"Freight passing loops program",sector:"Government",type:"Rail / transit",size:95,overrun:22,cats:{scope:3.6,vendor:2.9,schedule:4.3,site:5.7,utilities:2.8,approvals:1.7,land:2.3,weather:2.1}},
- {name:"Hospital tower expansion",sector:"Health",type:"Buildings / precinct",size:220,overrun:34,cats:{scope:8.9,vendor:4.6,schedule:6.2,site:5.4,utilities:3.7,approvals:2.6,land:0.4,weather:2.0}},
- {name:"Justice precinct redevelopment",sector:"Government",type:"Buildings / precinct",size:160,overrun:26,cats:{scope:6.8,vendor:3.9,schedule:4.9,site:4.2,utilities:2.9,approvals:2.8,land:1.5,weather:1.6}},
- {name:"TAFE campus consolidation",sector:"Government",type:"Buildings / precinct",size:74,overrun:17,cats:{scope:4.4,vendor:2.7,schedule:3.0,site:2.9,utilities:1.8,approvals:1.5,land:0.7,weather:1.2}},
-];
-
-/* Tier 2 — anonymised industry aggregates by delivery type × category (% of base; invented demo values).
-   p50/p90 = percentile of category cost as % of base across the sample; n = sample size; freq = share of projects where the category was material (≥1% of base). */
-const INDUSTRY={
- "ERP implementation":{scope:{p50:7.8,p90:16.2,n:214,freq:0.92},vendor:{p50:3.1,p90:6.8,n:214,freq:0.71},data:{p50:5.6,p90:11.4,n:198,freq:0.84},integration:{p50:4.9,p90:11.9,n:206,freq:0.63},people:{p50:1.6,p90:3.9,n:214,freq:0.38},schedule:{p50:4.4,p90:9.8,n:214,freq:0.77}},
- "Data platform":{scope:{p50:5.4,p90:11.8,n:126,freq:0.85},vendor:{p50:2.0,p90:4.6,n:126,freq:0.58},data:{p50:6.9,p90:13.5,n:126,freq:0.91},integration:{p50:3.2,p90:7.8,n:118,freq:0.55},people:{p50:1.3,p90:3.4,n:126,freq:0.33},schedule:{p50:2.8,p90:6.9,n:126,freq:0.64}},
- "Cloud migration":{scope:{p50:3.6,p90:8.1,n:167,freq:0.74},vendor:{p50:2.4,p90:5.2,n:167,freq:0.62},data:{p50:3.3,p90:7.4,n:160,freq:0.69},integration:{p50:4.0,p90:9.2,n:167,freq:0.66},people:{p50:0.9,p90:2.6,n:167,freq:0.27},schedule:{p50:2.1,p90:5.4,n:167,freq:0.55}},
- "Custom build":{scope:{p50:11.6,p90:22.4,n:143,freq:0.95},vendor:{p50:3.3,p90:7.1,n:143,freq:0.66},data:{p50:4.3,p90:9.6,n:131,freq:0.71},integration:{p50:6.8,p90:14.3,n:143,freq:0.78},people:{p50:2.4,p90:5.8,n:143,freq:0.52},schedule:{p50:5.9,p90:12.6,n:143,freq:0.83}},
- "Road / highway":{scope:{p50:3.4,p90:7.8,n:186,freq:0.79},vendor:{p50:2.5,p90:5.3,n:186,freq:0.68},schedule:{p50:3.0,p90:6.9,n:186,freq:0.72},site:{p50:5.8,p90:12.4,n:186,freq:0.86},utilities:{p50:3.4,p90:8.2,n:174,freq:0.74},approvals:{p50:1.5,p90:4.1,n:186,freq:0.55},land:{p50:1.8,p90:5.6,n:169,freq:0.49},weather:{p50:2.1,p90:5.9,n:186,freq:0.66}},
- "Rail / transit":{scope:{p50:5.8,p90:12.6,n:112,freq:0.88},vendor:{p50:4.0,p90:8.8,n:112,freq:0.77},schedule:{p50:6.1,p90:13.8,n:112,freq:0.85},site:{p50:6.6,p90:14.2,n:112,freq:0.83},utilities:{p50:5.4,p90:13.1,n:104,freq:0.79},approvals:{p50:2.3,p90:5.7,n:112,freq:0.61},land:{p50:2.0,p90:6.3,n:98,freq:0.52},weather:{p50:1.9,p90:5.2,n:112,freq:0.58}},
- "Buildings / precinct":{scope:{p50:6.4,p90:14.8,n:154,freq:0.90},vendor:{p50:3.6,p90:7.9,n:154,freq:0.72},schedule:{p50:4.6,p90:10.4,n:154,freq:0.78},site:{p50:4.3,p90:10.2,n:154,freq:0.76},utilities:{p50:2.6,p90:6.4,n:141,freq:0.63},approvals:{p50:2.2,p90:5.8,n:154,freq:0.64},land:{p50:0.9,p90:3.4,n:120,freq:0.31},weather:{p50:1.6,p90:4.6,n:154,freq:0.57}},
-};
-
-/* ---------- Helpers ---------- */
-const fmtM=v=>"$"+v.toFixed(2)+"M";
-const fmtM1=v=>"$"+v.toFixed(1)+"M";
-const pctOf=(sorted,p)=>{const i=(sorted.length-1)*p,lo=Math.floor(i),hi=Math.ceil(i);return sorted[lo]+(sorted[hi]-sorted[lo])*(i-lo);};
-
-/* ---------- Simulation ---------- */
-/* Correlation: two-level Gaussian copula imposed by Iman–Conover rank reordering.
-   A project-wide systemic driver correlates every risk at rho/2; a category driver
-   lifts same-category pairs to rho. Marginals are preserved exactly — only the joint
-   ordering changes, so the mean is untouched while the tail widens honestly. */
-function applyCorrelation(per,riskSet,rho,rng){
-  if(!(rho>0)||per.length<2)return;
-  const N=per[0].length;
-  const rg=rho/2;
-  const a=Math.sqrt(rg),b=Math.sqrt(rho-rg),c=Math.sqrt(1-rho);
-  const G=new Float64Array(N);
-  for(let i=0;i<N;i++)G[i]=randn(rng);
-  const catZ={};
-  for(const r of riskSet){
-    if(!catZ[r.cat]){const z=new Float64Array(N);for(let i=0;i<N;i++)z[i]=randn(rng);catZ[r.cat]=z;}
-  }
-  for(let k=0;k<riskSet.length;k++){
-    const zc=catZ[riskSet[k].cat];
-    const z=new Float64Array(N);
-    for(let i=0;i<N;i++)z[i]=a*G[i]+b*zc[i]+c*randn(rng);
-    const order=Array.from({length:N},(_,i)=>i).sort((x,y)=>z[x]-z[y]);
-    const sorted=Float64Array.from(per[k]).sort();
-    const out=new Float64Array(N);
-    for(let j=0;j<N;j++)out[order[j]]=sorted[j];
-    per[k]=out;
-  }
-}
-function simulate(riskSet,base,N,seed=42,rho=0){
-  const rng=mulberry32(seed);
-  const totals=new Float64Array(N);
-  let per=riskSet.map(()=>new Float64Array(N));
-  for(let i=0;i<N;i++){
-    for(let k=0;k<riskSet.length;k++){
-      const r=riskSet[k];let v=0;
-      if(r.kind!=="event"||rng()<r.prob){
-        v=SAMPLERS[r.dist](rng,r.min,r.mode,r.max);
-        if(r.dist!=="normal"&&r.dist!=="lognormal")v=Math.max(r.min,Math.min(r.max,v));
-        v=Math.max(0,v);
-      }
-      per[k][i]=v;
-    }
-  }
-  applyCorrelation(per,riskSet,rho,rng);
-  for(let i=0;i<N;i++){
-    let t=base;
-    for(let k=0;k<riskSet.length;k++)t+=per[k][i];
-    totals[i]=t;
-  }
-  const sorted=Float64Array.from(totals).sort();
-  return{totals,per,sorted,base,N,
-    p10:pctOf(sorted,0.10),p50:pctOf(sorted,0.50),p80:pctOf(sorted,0.80),p90:pctOf(sorted,0.90),
-    mean:totals.reduce((a,b)=>a+b,0)/N};
-}
-function corr(x,y){const n=x.length;let sx=0,sy=0;for(let i=0;i<n;i++){sx+=x[i];sy+=y[i];}
-  const mx=sx/n,my=sy/n;let cxy=0,cxx=0,cyy=0;
-  for(let i=0;i<n;i++){const dx=x[i]-mx,dy=y[i]-my;cxy+=dx*dy;cxx+=dx*dx;cyy+=dy*dy;}
-  return cxx&&cyy?cxy/Math.sqrt(cxx*cyy):0;}
-
-/* ---------- Reference-class matching & calibration ---------- */
-function matches(proj){
-  return ORG_HISTORY.map(p=>{
-    let s=0;if(p.type===proj.type)s+=45;if(p.sector===proj.sector)s+=30;
-    s+=25*Math.max(0,1-Math.abs(Math.log(p.size/proj.base))/Math.log(4));
-    return{...p,score:Math.round(s)};
-  }).sort((a,b)=>b.score-a.score);
-}
-function suggestFor(risk,proj){
-  if(risk.cat==="other")return null;
-  const b=proj.base;
-  const top=matches(proj).filter(p=>p.type===proj.type&&p.score>=45).slice(0,6);
-  const vals=top.map(p=>p.cats[risk.cat]).filter(v=>v!=null).sort((x,y)=>x-y);
-  const ind=(INDUSTRY[proj.type]||{})[risk.cat];
-  const org=vals.length>=4?{p10:pctOf(vals,0.10),p50:pctOf(vals,0.50),p90:pctOf(vals,0.90),n:vals.length,freq:vals.filter(v=>v>=1).length/vals.length}:null;
-  let src,q10,q50,q90,n,freq;
-  if(org){src="your history";({p10:q10,p50:q50,p90:q90,n,freq}=org);}
-  else if(ind){src="industry benchmark";q50=ind.p50;q90=ind.p90;q10=q50*q50/q90;n=ind.n;freq=ind.freq;}
-  else return null;
-  const sugg={min:+(q10*b/100).toFixed(2),mode:+(q50*b/100).toFixed(2),max:+(q90*b/100).toFixed(2)};
-  const prob=risk.kind==="event"?+freq.toFixed(2):risk.prob;
-  const curPct=risk.mode*(risk.kind==="event"?risk.prob:1)/b*100;
-  const refPct=q50*(risk.kind==="event"?prob:1);
-  const dir=curPct<refPct?"below":"above";
-  const judge=dir==="below"?"likely optimistic — the reference class says budget more":"more conservative than the reference class";
-  const narrative= src==="your history"
-    ? `Based on ${n} comparable ${proj.type} projects in your own portfolio, ${CATS[risk.cat].toLowerCase()} consumed a median ${q50.toFixed(1)}% of base (P90 ${q90.toFixed(1)}%). Your entry implies ~${curPct.toFixed(1)}% — ${dir} your own history, ${judge}.`
-    : `Too few comparable projects in your delivery history — using the illustrative industry decomposition instead (published research reports whole-of-project outturns only; see Published evidence): across n=${n} ${proj.type} programmes, ${CATS[risk.cat].toLowerCase()} ran a median ${q50.toFixed(1)}% of base (P90 ${q90.toFixed(1)}%). Your entry implies ~${curPct.toFixed(1)}% — ${dir} the benchmark, ${judge}.`;
-  return{src,sugg,prob,n,narrative,org,ind};
-}
-
-/* ---------- Import: delimiter-separated text (CSV / pasted TSV) ---------- */
-function parseDelimited(text){
-  const firstNl=text.indexOf("\n");
-  const head=firstNl>-1?text.slice(0,firstNl):text;
-  const delim=head.includes("\t")?"\t":",";
-  const rows=[];let row=[],cur="",q=false;
-  for(let i=0;i<text.length;i++){const ch=text[i];
-    if(q){ if(ch==='"'){ if(text[i+1]==='"'){cur+='"';i++;} else q=false; } else cur+=ch; }
-    else if(ch==='"')q=true;
-    else if(ch===delim){row.push(cur);cur="";}
-    else if(ch==="\n"||ch==="\r"){ if(ch==="\r"&&text[i+1]==="\n")i++; row.push(cur);cur=""; if(row.some(c=>String(c).trim()!==""))rows.push(row); row=[]; }
-    else cur+=ch;
-  }
-  if(cur!==""||row.length){row.push(cur); if(row.some(c=>String(c).trim()!==""))rows.push(row);}
-  return rows;
-}
-
-/* ---------- Import: .xlsx (minimal client-side reader — zip + sheet XML, no libraries) ---------- */
-function decodeXml(s){return String(s).replace(/&#x([0-9a-fA-F]+);/g,(_,h)=>String.fromCodePoint(parseInt(h,16)))
-  .replace(/&#(\d+);/g,(_,d)=>String.fromCodePoint(+d))
-  .replace(/&lt;/g,"<").replace(/&gt;/g,">").replace(/&quot;/g,'"').replace(/&apos;/g,"'").replace(/&amp;/g,"&");}
-function colIdx(ref){const m=/^[A-Z]+/.exec(ref);if(!m)return 0;
-  return[...m[0]].reduce((a,c)=>a*26+c.charCodeAt(0)-64,0)-1;}
-async function parseXlsx(buf){
-  const u8=new Uint8Array(buf),dv=new DataView(buf);
-  let eocd=-1;
-  for(let i=u8.length-22;i>=Math.max(0,u8.length-22-65558);i--){
-    if(dv.getUint32(i,true)===0x06054b50){eocd=i;break;}}
-  if(eocd<0)throw new Error("Not a valid .xlsx (zip directory not found)");
-  const count=dv.getUint16(eocd+10,true);let p=dv.getUint32(eocd+16,true);
-  const entries={};
-  for(let i=0;i<count;i++){
-    if(dv.getUint32(p,true)!==0x02014b50)break;
-    const method=dv.getUint16(p+10,true),csize=dv.getUint32(p+20,true);
-    const nlen=dv.getUint16(p+28,true),elen=dv.getUint16(p+30,true),clen=dv.getUint16(p+32,true);
-    const lho=dv.getUint32(p+42,true);
-    const name=new TextDecoder().decode(u8.subarray(p+46,p+46+nlen));
-    entries[name]={method,csize,lho};p+=46+nlen+elen+clen;
-  }
-  async function file(name){
-    const e=entries[name];if(!e)return null;
-    const q=e.lho;
-    const nlen=dv.getUint16(q+26,true),elen=dv.getUint16(q+28,true);
-    const comp=u8.subarray(q+30+nlen+elen,q+30+nlen+elen+e.csize);
-    if(e.method===0)return new TextDecoder().decode(comp);
-    const stream=new Blob([comp]).stream().pipeThrough(new DecompressionStream("deflate-raw"));
-    return await new Response(stream).text();
-  }
-  const sst=[];
-  const sstXml=await file("xl/sharedStrings.xml");
-  if(sstXml){for(const m of sstXml.matchAll(/<si[\s>][\s\S]*?<\/si>/g)){
-    sst.push(decodeXml([...m[0].matchAll(/<t[^>]*>([\s\S]*?)<\/t>/g)].map(x=>x[1]).join("")));}}
-  const sheetName=Object.keys(entries).filter(n=>/^xl\/worksheets\/sheet\d+\.xml$/.test(n)).sort()[0];
-  const shXml=await file(sheetName);
-  if(!shXml)throw new Error("No worksheet found in workbook");
-  const rows=[];
-  for(const rm of shXml.matchAll(/<row[^>]*>([\s\S]*?)<\/row>/g)){
-    const cells={};
-    for(const cm of rm[1].matchAll(/<c\b[^>]*\/>|<c\b[^>]*>[\s\S]*?<\/c>/g)){
-      const cell=cm[0];
-      const attrs=/^<c\b([^>]*?)\/?>/.exec(cell)[1];
-      const ref=/r="([A-Z]+\d+)"/.exec(attrs);const t=/t="(\w+)"/.exec(attrs);
-      const v=/<v[^>]*>([\s\S]*?)<\/v>/.exec(cell);
-      const is=/<is>[\s\S]*?<t[^>]*>([\s\S]*?)<\/t>/.exec(cell);
-      let val="";
-      if(t&&t[1]==="s"&&v)val=sst[+v[1]]??"";
-      else if(t&&t[1]==="inlineStr")val=decodeXml(is?is[1]:"");
-      else if(t&&(t[1]==="str"||t[1]==="b"))val=decodeXml(v?v[1]:"");
-      else if(v)val=+v[1];
-      if(ref)cells[colIdx(ref[1])]=val;
-    }
-    rows.push(cells);
-  }
-  const maxc=rows.reduce((a,r)=>Math.max(a,...Object.keys(r).map(x=>+x+1)),0);
-  return rows.map(r=>Array.from({length:maxc},(_,i)=>r[i]!==undefined?r[i]:""))
-             .filter(r=>r.some(c=>String(c).trim()!==""));
-}
-
-/* ---------- Import: header mapping → risks ---------- */
-const HEADER_MAP=[
- ["name",/^(risk(name|description)?|name|description|title)$/],
- ["cat",/^(riskcategory|category|cat|group|theme)$/],
- ["kind",/^(type|kind|risktype)$/],
- ["dist",/^dist(ribution)?$/],
- ["min",/^(min(imum)?(cost)?|best(case)?|low|p10|optimistic)$/],
- ["mode",/^(mostlikely|likely(cost)?|mode|ml|expected|typical)$/],
- ["max",/^(max(imum)?(cost)?|worst(case)?|high|p90|pessimistic)$/],
- ["prob",/^(probability(ofoccurrence)?|likelihood|prob|chance|poccur(rence)?)$/],
-];
-function mapCat(s){s=String(s||"").toLowerCase();
- if(/site|ground|geotech|latent|contamin|asbestos|rock|soil/.test(s))return"site";
- if(/utilit|services relocat|sewer|watermain|power line|telco/.test(s))return"utilities";
- if(/approval|planning|environment|heritage|consent|permit/.test(s))return"approvals";
- if(/land|property|acquisition|easement|resumption/.test(s))return"land";
- if(/weather|rain|flood|storm|cyclone/.test(s))return"weather";
- if(/scope|requirement|change/.test(s))return"scope";
- if(/vendor|contract|procure|rate|supplier|commercial/.test(s))return"vendor";
- if(/data|migration|quality/.test(s))return"data";
- if(/integrat|interface|technical|legacy/.test(s))return"integration";
- if(/people|resource|attrition|keyperson|key person|staff|capab/.test(s))return"people";
- if(/schedule|delay|time|duration/.test(s))return"schedule";
- return"other";}
-function mapDist(s){s=String(s||"").toLowerCase();
- if(/pert|beta/.test(s))return"pert";
- if(/tri/.test(s))return"tri";
- if(/uni/.test(s))return"uniform";
- if(/logn/.test(s))return"lognormal";
- if(/norm|gauss/.test(s))return"normal";
- return"pert";}
-function toNum(v){if(typeof v==="number")return v;
- const s=String(v).replace(/[$,\s]/g,"").replace(/%$/,"");
- if(s==="")return NaN;return parseFloat(s);}
-function mapRows(rows){
-  const warnings=[];
-  if(!rows.length)return{risks:[],warnings:["No rows found."]};
-  const norm=h=>String(h).toLowerCase().replace(/[^a-z0-9]/g,"");
-  const cols={};
-  rows[0].forEach((h,i)=>{const nh=norm(h);
-    for(const[key,re]of HEADER_MAP){if(re.test(nh)&&cols[key]===undefined){cols[key]=i;return;}}});
-  if(cols.name===undefined||cols.mode===undefined&&cols.max===undefined)
-    return{risks:[],warnings:["Header row not recognised — need at least a Risk column plus Most Likely or Max. Download the template for the expected shape."]};
-  const out=[];let dollarScale=false,skipped=0;
-  const nums=[];
-  for(let i=1;i<rows.length;i++){["min","mode","max"].forEach(k=>{if(cols[k]!==undefined){const n=toNum(rows[i][cols[k]]);if(!isNaN(n))nums.push(n);}});}
-  if(nums.length&&Math.max(...nums)>5000){dollarScale=true;warnings.push("Impact values look like dollars — converted to $M (÷1,000,000).");}
-  const sc=dollarScale?1e6:1;
-  for(let i=1;i<rows.length;i++){
-    const row=rows[i];
-    const name=String(row[cols.name]??"").trim();
-    if(!name){skipped++;continue;}
-    let min=cols.min!==undefined?toNum(row[cols.min])/sc:NaN;
-    let mode=cols.mode!==undefined?toNum(row[cols.mode])/sc:NaN;
-    let max=cols.max!==undefined?toNum(row[cols.max])/sc:NaN;
-    if(isNaN(mode)&&!isNaN(min)&&!isNaN(max))mode=(min+max)/2;
-    if(isNaN(min))min=isNaN(mode)?NaN:mode*0.5;
-    if(isNaN(max))max=isNaN(mode)?NaN:mode*2;
-    if(isNaN(mode)||isNaN(min)||isNaN(max)){skipped++;continue;}
-    if(max<min){const t=max;max=min;min=t;}
-    mode=Math.min(Math.max(mode,min),max);
-    let prob=cols.prob!==undefined?toNum(row[cols.prob]):NaN;
-    if(!isNaN(prob)&&prob>1)prob/=100;
-    const kindRaw=cols.kind!==undefined?String(row[cols.kind]).toLowerCase():"";
-    let kind=/event|discrete|threat/.test(kindRaw)?"event":/cont/.test(kindRaw)?"continuous":(!isNaN(prob)&&prob>0&&prob<1?"event":"continuous");
-    if(kind!=="event")prob=1;else if(isNaN(prob))prob=0.5;
-    out.push({id:++nextId,name,cat:mapCat(cols.cat!==undefined?row[cols.cat]:name),
-      kind,dist:mapDist(cols.dist!==undefined?row[cols.dist]:""),
-      min:+min.toFixed(3),mode:+mode.toFixed(3),max:+max.toFixed(3),prob:+(+prob).toFixed(2),cal:false});
-  }
-  if(skipped)warnings.push(`${skipped} row(s) skipped (missing name or numeric impact).`);
-  const others=out.filter(r=>r.cat==="other").length;
-  if(others)warnings.push(`${others} risk(s) mapped to category "Other" — no benchmark exists for them, so AI calibration is unavailable there.`);
-  return{risks:out,warnings};
-}
-
-const TEMPLATE_CSV=`Risk,Category,Type,Distribution,Min,Most Likely,Max,Probability
-Scope creep on reporting module,Scope,Continuous,PERT,0.10,0.35,1.20,
-Vendor rate escalation,Vendor,Continuous,PERT,0.00,0.25,0.70,
-Legacy interface rework,Integration,Event,Triangular,0.30,0.80,2.00,35%
-`;
-
-/* ---------- Export: .xlsx writer (stored-entry zip with CRC32 + inline-string sheets) ---------- */
-const CRC_T=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c;}return t;})();
-function crc32(u8){let c=0xFFFFFFFF;for(let i=0;i<u8.length;i++)c=CRC_T[(c^u8[i])&0xFF]^(c>>>8);return(c^0xFFFFFFFF)>>>0;}
-function xmlEsc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
-function colName(i){let s="";i++;while(i){s=String.fromCharCode(65+(i-1)%26)+s;i=Math.floor((i-1)/26);}return s;}
-function sheetXml(rows){
-  let out='<?xml version="1.0" encoding="UTF-8" standalone="yes"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>';
-  rows.forEach((row,ri)=>{
-    out+=`<row r="${ri+1}">`;
-    row.forEach((cell,ci)=>{
-      if(cell===null||cell===undefined||cell==="")return;
-      const isObj=typeof cell==="object";
-      const v=isObj?cell.v:cell;
-      const ref=colName(ci)+(ri+1),st=isObj&&cell.b?' s="1"':"";
-      if(typeof v==="number"&&isFinite(v))out+=`<c r="${ref}"${st}><v>${v}</v></c>`;
-      else out+=`<c r="${ref}"${st} t="inlineStr"><is><t>${xmlEsc(v)}</t></is></c>`;
-    });
-    out+="</row>";
-  });
-  return out+"</sheetData></worksheet>";
-}
-function zipStore(files){
-  const enc=new TextEncoder(),parts=[],central=[];let off=0;
-  for(const f of files){
-    const name=enc.encode(f.name),data=enc.encode(f.text),crc=crc32(data);
-    const lh=new DataView(new ArrayBuffer(30));
-    lh.setUint32(0,0x04034b50,true);lh.setUint16(4,20,true);
-    lh.setUint32(14,crc,true);lh.setUint32(18,data.length,true);lh.setUint32(22,data.length,true);
-    lh.setUint16(26,name.length,true);
-    parts.push(new Uint8Array(lh.buffer),name,data);
-    const cd=new DataView(new ArrayBuffer(46));
-    cd.setUint32(0,0x02014b50,true);cd.setUint16(4,20,true);cd.setUint16(6,20,true);
-    cd.setUint32(16,crc,true);cd.setUint32(20,data.length,true);cd.setUint32(24,data.length,true);
-    cd.setUint16(28,name.length,true);cd.setUint32(42,off,true);
-    central.push(new Uint8Array(cd.buffer),name);
-    off+=30+name.length+data.length;
-  }
-  const cdLen=central.reduce((a,b)=>a+b.length,0);
-  const eo=new DataView(new ArrayBuffer(22));
-  eo.setUint32(0,0x06054b50,true);eo.setUint16(8,files.length,true);eo.setUint16(10,files.length,true);
-  eo.setUint32(12,cdLen,true);eo.setUint32(16,off,true);
-  const all=[...parts,...central,new Uint8Array(eo.buffer)];
-  const out=new Uint8Array(all.reduce((a,b)=>a+b.length,0));
-  let p=0;for(const b of all){out.set(b,p);p+=b.length;}
-  return out;
-}
-function buildXlsx(proj,riskSet,sim,orgTop,ind){
-  const H=s=>({v:s,b:true});
-  const reg=[[H("Risk"),H("Category"),H("Type"),H("Distribution"),H("Min"),H("Most Likely"),H("Max"),H("Probability"),H("AI-calibrated")]];
-  riskSet.forEach(r=>reg.push([r.name,CATS[r.cat],r.kind==="event"?"Event":"Continuous",r.dist.toUpperCase(),
-    r.min,r.mode,r.max,r.kind==="event"?r.prob:"",r.cal?"Yes":""]));
-  const res=[[H("Antedata — simulation results")],[],
-    ["Project",proj.name],["Sector",proj.sector],["Delivery type",proj.type],
-    ["Base estimate ($M)",proj.base],["Iterations",sim.N],[],
-    [H("Statistic"),H("$M")],
-    ["P10",+sim.p10.toFixed(3)],["P50 (median)",+sim.p50.toFixed(3)],["Mean",+sim.mean.toFixed(3)],
-    ["P80",+sim.p80.toFixed(3)],["P90",+sim.p90.toFixed(3)],
-    ["P80 contingency",+(sim.p80-proj.base).toFixed(3)],[],
-    [H("S-curve data — chart the two columns below")],
-    [H("Percentile"),H("Total cost $M")]];
-  for(let p=1;p<=99;p++)res.push([p/100,+pctOf(sim.sorted,p/100).toFixed(3)]);
-  const sens=[[H("Risk"),H("Correlation with total")]];
-  riskSet.map((r,k)=>({name:r.name,c:corr(sim.per[k],sim.totals)}))
-    .sort((a,b)=>Math.abs(b.c)-Math.abs(a.c)).forEach(d=>sens.push([d.name,+d.c.toFixed(3)]));
-  const ref=[[H("Your delivery history — closest projects (inside your tenancy; demo data)")],
-    [H("Project"),H("Type"),H("Base $M"),H("Overrun %"),H("Similarity")]];
-  orgTop.forEach(p=>ref.push([p.name,p.type,p.size,p.overrun,p.score]));
-  ref.push([],[H("Industry benchmark — anonymised aggregates ("+proj.type+", sample data)")],
-    [H("Category"),H("Median % of base"),H("P90 % of base"),H("Material in % of projects"),H("n")]);
-  Object.entries(ind||{}).forEach(([k,v])=>ref.push([CATS[k],v.p50,v.p90,Math.round(v.freq*100),v.n]));
-  const sheets=[["Risk register",reg],["Results",res],["Sensitivity",sens],["Reference class",ref]];
-  const files=[
-    {name:"[Content_Types].xml",text:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>'+sheets.map((_,i)=>`<Override PartName="/xl/worksheets/sheet${i+1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join("")+'<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/></Types>'},
-    {name:"_rels/.rels",text:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'},
-    {name:"xl/workbook.xml",text:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets>'+sheets.map((s,i)=>`<sheet name="${xmlEsc(s[0])}" sheetId="${i+1}" r:id="rId${i+1}"/>`).join("")+'</sheets></workbook>'},
-    {name:"xl/_rels/workbook.xml.rels",text:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'+sheets.map((_,i)=>`<Relationship Id="rId${i+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i+1}.xml"/>`).join("")+`<Relationship Id="rId${sheets.length+1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`},
-    {name:"xl/styles.xml",text:'<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><fonts count="2"><font><sz val="11"/><name val="Calibri"/></font><font><b/><sz val="11"/><name val="Calibri"/></font></fonts><fills count="2"><fill><patternFill patternType="none"/></fill><fill><patternFill patternType="gray125"/></fill></fills><borders count="1"><border/></borders><cellStyleXfs count="1"><xf/></cellStyleXfs><cellXfs count="2"><xf xfId="0"/><xf fontId="1" xfId="0" applyFont="1"/></cellXfs></styleSheet>'},
-    ...sheets.map((s,i)=>({name:`xl/worksheets/sheet${i+1}.xml`,text:sheetXml(s[1])})),
-  ];
-  return zipStore(files);
-}
-
-/* ==== DOM ==== everything below touches the document ==== */
-const $=id=>document.getElementById(id);
-const debounce=(fn,ms)=>{let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms);};};
-function project(){return{name:$("pname").value,sector:$("psector").value,type:$("ptype").value,base:Math.max(0.1,parseFloat($("pbase").value)||12)};}
-
-/* ---------- Register ---------- */
-let regSearch="",regFilter="";
-function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");}
-function renderRegister(){
-  const body=$("reg-body");body.innerHTML="";
-  const q=regSearch.toLowerCase();
-  const vis=risks.filter(r=>(!q||r.name.toLowerCase().includes(q))&&(!regFilter||r.cat===regFilter));
-  const frag=document.createDocumentFragment();
-  vis.forEach((r,i)=>{
-    const tr=document.createElement("tr");tr.dataset.id=r.id;
-    tr.innerHTML=`
-      <td class="idx">${i+1}</td>
-      <td class="name-cell">${r.cal?'<span class="cal-mark" title="AI-calibrated">✦</span>':""}<input data-f="name" value="${esc(r.name)}" style="width:calc(100% - ${r.cal?14:0}px)"></td>
-      <td><select data-f="cat">${Object.entries(CATS).map(([k,v])=>`<option value="${k}" ${k===r.cat?"selected":""}>${v}</option>`).join("")}</select></td>
-      <td><select data-f="kind"><option value="continuous" ${r.kind==="continuous"?"selected":""}>Cont.</option><option value="event" ${r.kind==="event"?"selected":""}>Event</option></select></td>
-      <td><select data-f="dist">${["pert","tri","uniform","normal","lognormal"].map(x=>`<option ${x===r.dist?"selected":""}>${x}</option>`).join("")}</select></td>
-      <td><input class="num" type="number" step="0.05" data-f="min" value="${r.min}"></td>
-      <td><input class="num" type="number" step="0.05" data-f="mode" value="${r.mode}"></td>
-      <td><input class="num" type="number" step="0.05" data-f="max" value="${r.max}"></td>
-      <td><input class="num" type="number" step="0.05" min="0" max="1" data-f="prob" value="${r.prob}" ${r.kind==="event"?"":"disabled"}></td>
-      <td><button class="mini cal" title="Calibrate against reference class" data-cal="${r.id}">✦</button></td>
-      <td><button class="mini del" title="Delete risk" data-del="${r.id}">×</button></td>`;
-    frag.appendChild(tr);
-  });
-  body.appendChild(frag);
-  const ev=risks.filter(r=>r.kind==="event").length;
-  $("reg-count").textContent=`${vis.length} shown · ${risks.length} risks (${ev} event, ${risks.length-ev} continuous)`;
-}
-$("reg-body").addEventListener("input",debounce(e=>{
-  const inp=e.target;if(!inp.dataset.f)return;
-  const r=risks.find(x=>x.id==inp.closest("tr").dataset.id);if(!r)return;
-  const f=inp.dataset.f;
-  if(f==="name")r.name=inp.value;
-  else if(f==="cat"||f==="dist")r[f]=inp.value;
-  else if(f==="kind"){r.kind=inp.value;if(r.kind!=="event")r.prob=1;else if(r.prob>=1)r.prob=0.5;renderRegister();}
-  else r[f]=parseFloat(inp.value)||0;
-  if(f!=="name")r.cal=false;
-  run();
-},300));
-$("reg-body").addEventListener("click",e=>{
-  const cal=e.target.closest("[data-cal]"),del=e.target.closest("[data-del]");
-  if(cal)showCal([+cal.dataset.cal]);
-  if(del){risks=risks.filter(r=>r.id!=+del.dataset.del);renderRegister();run();}
-});
-$("reg-search").addEventListener("input",e=>{regSearch=e.target.value;renderRegister();});
-$("reg-filter").addEventListener("change",e=>{regFilter=e.target.value;renderRegister();});
-$("add-risk").addEventListener("click",()=>{
-  risks.push({id:++nextId,name:"New risk",cat:"other",kind:"continuous",dist:"pert",min:0.05,mode:0.15,max:0.50,prob:1,cal:false});
-  renderRegister();run();
-  const rows=$("reg-body").rows;if(rows.length)rows[rows.length-1].scrollIntoView({block:"nearest"});
-});
-(function(){const f=$("reg-filter");Object.entries(CATS).forEach(([k,v])=>{const o=document.createElement("option");o.value=k;o.textContent=v;f.appendChild(o);});})();
-
-/* ---------- Sample 60-risk register ---------- */
-const SAMPLE_NAMES={
- scope:["Scope creep — reporting & analytics","Uncaptured business rules in finance","Regulatory change mid-delivery","Localisation requirements expansion","Workflow redesign after UAT feedback","New agency onboarding added to scope","Security accreditation scope growth","Change requests from executive review","Underestimated configuration effort","Additional environments required"],
- vendor:["Vendor rate escalation at renewal","SI change-order pricing pressure","Licence true-up costs","Third-party module price increase","Contract variation negotiation costs","Offshore delivery rate adjustment","Specialist contractor premium","Vendor bench substitution costs","Support tier upgrade forced","Exchange-rate movement on licences"],
- data:["Legacy data quality remediation","Duplicate master records cleanup","Historical data conversion effort","Data mapping complexity","Reference data governance gaps","Archival strategy rework","Privacy classification remediation","Reconciliation failures at cutover","Unstructured data migration","Data warehouse re-pointing"],
- integration:["Legacy interface rework","Middleware version incompatibility","API throttling under load","Payroll interface certification","Third-party system upgrade collision","Single sign-on integration issues","Batch schedule dependency conflicts","Message queue redesign","Reporting feed rebuilds","Environment sync failures"],
- people:["Key architect attrition","SME availability constraints","Change-fatigue in business units","Delayed backfill recruitment","Knowledge transfer shortfall","Union consultation delays","Training capacity shortfall","Programme leadership turnover"],
- schedule:["UAT extension — defect burn-down","Cutover window slip","Decision latency at steering committee","Environment provisioning delays","Vendor dependency slippage","Freeze-period collision (EOFY)","Parallel-run extension","Go-live readiness re-baseline"],
- other:["Cyber incident during delivery","Machinery-of-government change","Office relocation disruption","Pandemic-style disruption event"],
-};
-const INFRA_SAMPLE_NAMES={
- site:["Latent rock in cut sections","Contaminated spoil disposal","Groundwater ingress at excavation","Asbestos discovery in demolition","Geotechnical variance vs bore logs","Unmapped services strike","Soft-soil settlement treatment","Acid sulfate soils management"],
- utilities:["HV power line relocation","Watermain diversion redesign","Telco pit & duct relocation","Sewer main clash at chainage 4.2k","Gas main protection works","Third-party utility approval delays"],
- approvals:["Environmental offset expansion","Heritage find — salvage & delay","Planning condition variations","EPA licence condition changes","Aboriginal cultural heritage assessment extension","Noise-wall consultation redesign"],
- land:["Additional property acquisitions","Easement negotiation premium","Business relocation compensation","Temporary occupation licence disputes"],
- weather:["Extended wet-weather standdown","Flood event damage & rework","Storm damage to temporary works","Cyclone season productivity loss"],
- vendor:["Head contractor claim — latent conditions","Subcontractor insolvency substitution","Steel & concrete price escalation","Plant & haulage rate rises","Variation pricing pressure","Bitumen index escalation"],
- schedule:["Possession/occupation window slips","Traffic-staging resequencing","Wet-weather program extension","Approvals-driven start delay","Commissioning & handover extension","Defects rectification period overrun"],
- scope:["Design development growth (30%→100%)","Urban design & landscaping uplift","Stakeholder-driven betterment","Safety-in-design additions","Interface works added at boundaries","Signage & ITS scope growth"],
-};
-$("load-sample").addEventListener("click",()=>{
-  const infra=["Road / highway","Rail / transit","Buildings / precinct"].includes(project().type);
-  const NAMES=infra?INFRA_SAMPLE_NAMES:SAMPLE_NAMES;
-  const rng=mulberry32(7),b=project().base,out=[];
-  for(const[cat,names]of Object.entries(NAMES)){
-    for(const nm of names){
-      const mode=+(b*(0.0015+rng()*0.008)).toFixed(2);
-      const min=+(mode*(0.2+rng()*0.3)).toFixed(2);
-      const max=+(mode*(2.2+rng()*1.8)).toFixed(2);
-      const ev=rng()<0.35;
-      out.push({id:++nextId,name:nm,cat,kind:ev?"event":"continuous",
-        dist:["pert","tri","lognormal"][Math.floor(rng()*3)],
-        min,mode:Math.max(mode,min),max,prob:ev?+(0.15+rng()*0.4).toFixed(2):1,cal:false});
-    }
-  }
-  risks=out;$("ai-panel").hidden=true;renderRegister();run();
-});
-
-/* ---------- Import ---------- */
-$("open-import").addEventListener("click",()=>{$("imp-msg").innerHTML="";$("import-dlg").showModal();});
-$("imp-close").addEventListener("click",()=>$("import-dlg").close());
-
-/* ---------- File saving: artifact `downloads` capability, anchor fallback for local use ---------- */
-let DL_NS;
-function dlNs(){
-  if(DL_NS===undefined){
-    DL_NS=(window.claude&&typeof window.claude.use==="function")
-      ?window.claude.use("downloads").catch(()=>null)
-      :Promise.resolve(null);
-  }
-  return DL_NS;
-}
-function dlMsg(t){const el=$("dl-msg");el.textContent=t;clearTimeout(dlMsg._t);if(t)dlMsg._t=setTimeout(()=>{el.textContent="";},8000);}
-async function saveFile(filename,data){
-  const dl=await dlNs();
-  if(!dl){
-    const blob=data instanceof Blob?data:new Blob([data]);
-    const a=document.createElement("a");
-    a.href=URL.createObjectURL(blob);a.download=filename;a.click();
-    setTimeout(()=>URL.revokeObjectURL(a.href),5000);
-    return{ok:true};
-  }
-  try{await dl.save({filename,data});return{ok:true};}
-  catch(e){const code=(e&&e.code)||"unavailable";
-    return{ok:false,code,ext:code==="rejected_extension"||code==="extension_not_enabled"};}
-}
-function csvEsc(v){const s=String(v);return /[",\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
-function registerCsv(){
-  const rows=[["Risk","Category","Type","Distribution","Min","Most Likely","Max","Probability"]];
-  risks.forEach(r=>rows.push([r.name,CATS[r.cat],r.kind==="event"?"Event":"Continuous",r.dist.toUpperCase(),r.min,r.mode,r.max,r.kind==="event"?r.prob:""]));
-  return rows.map(r=>r.map(csvEsc).join(",")).join("\r\n")+"\r\n";
-}
-async function saveTextWithFallback(stem,text,okMsg){
-  let r=await saveFile(stem+".csv",text);
-  if(!r.ok&&r.ext)r=await saveFile(stem+".txt",text);
-  dlMsg(r.ok?okMsg:(r.code==="declined"?"Save cancelled.":"Save unavailable in this view ("+r.code+")."));
-}
-$("dl-template").addEventListener("click",()=>saveTextWithFallback("antedata-risk-register-template",TEMPLATE_CSV,"Template saved."));
-async function doImport(){
-  const msg=$("imp-msg");msg.innerHTML="";
-  try{
-    let rows=null;
-    const f=$("imp-file").files[0];
-    if(f){
-      if(/\.xlsx$/i.test(f.name))rows=await parseXlsx(await f.arrayBuffer());
-      else rows=parseDelimited(await f.text());
-    }else if($("imp-paste").value.trim()){
-      rows=parseDelimited($("imp-paste").value);
-    }else{msg.textContent="Choose a file or paste rows first.";return;}
-    const{risks:imported,warnings}=mapRows(rows);
-    if(!imported.length){msg.innerHTML=`<span style="color:var(--crit)">Nothing imported.</span><ul>${warnings.map(w=>`<li>${w}</li>`).join("")}</ul>`;return;}
-    const mode=document.querySelector('input[name="imp-mode"]:checked').value;
-    risks=mode==="replace"?imported:risks.concat(imported);
-    $("imp-file").value="";$("imp-paste").value="";
-    renderRegister();run();$("ai-panel").hidden=true;
-    msg.innerHTML=`<span style="color:var(--good);font-weight:600">Imported ${imported.length} risks (${mode}).</span>`+
-      (warnings.length?`<ul>${warnings.map(w=>`<li>${w}</li>`).join("")}</ul>`:"");
-  }catch(err){msg.innerHTML=`<span style="color:var(--crit)">Import failed: ${esc(err.message)}</span>`;}
-}
-$("imp-go").addEventListener("click",doImport);
-
-/* ---------- Export ---------- */
-$("export-xlsx").addEventListener("click",async()=>{
-  if(!SIM)run();
-  const proj=project();
-  const stem=`antedata-${proj.name.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-+|-+$/g,"")||"model"}`;
-  const bytes=buildXlsx(proj,risks,SIM,matches(proj).slice(0,6),INDUSTRY[proj.type]);
-  const r=await saveFile(stem+".xlsx",bytes);
-  if(r.ok){dlMsg("Workbook saved.");return;}
-  if(r.ext){
-    await saveTextWithFallback(stem+"-register",registerCsv(),
-      "Saved the register as CSV — this viewer doesn't allow .xlsx saves; the CSV re-imports losslessly.");
-    return;
-  }
-  dlMsg(r.code==="declined"?"Save cancelled.":"Save unavailable in this view ("+r.code+").");
-});
-
-/* ---------- Tiles & charts ---------- */
-let SIM=null;
-function renderTiles(sim,proj){
-  const cont=sim.p80-proj.base;
-  let idx=sim.sorted.findIndex(v=>v>proj.base);if(idx<0)idx=sim.N;
-  $("tiles").innerHTML=`
-    <div class="tile hero"><div class="eyebrow">P80 contingency</div><div class="v">${fmtM(cont)}</div><div class="d">on ${fmtM1(proj.base)} base → ${fmtM(sim.p80)} funding line</div></div>
-    <div class="tile"><div class="eyebrow">P50 outcome</div><div class="v">${fmtM(sim.p50)}</div><div class="d">median of ${sim.N.toLocaleString()} iterations</div></div>
-    <div class="tile"><div class="eyebrow">Expected cost</div><div class="v">${fmtM(sim.mean)}</div><div class="d">mean · P90 ${fmtM(sim.p90)}</div></div>
-    <div class="tile"><div class="eyebrow">Base estimate holds</div><div class="v">${(idx/sim.N*100).toFixed(1)}%</div><div class="d">chance actuals ≤ base with no contingency</div></div>`;
-}
-const M={l:52,r:20,t:14,b:34},W=860,H=260;
-function renderScurve(sim){
-  const s=sim.sorted,min=s[0],max=s[s.length-1];
-  const x=v=>M.l+(v-min)/(max-min)*(W-M.l-M.r);
-  const y=p=>H-M.b-(p*(H-M.t-M.b));
-  const STEP=Math.max(1,Math.floor(s.length/300));
-  let path="";
-  for(let i=0;i<s.length;i+=STEP){path+=(i?"L":"M")+x(s[i]).toFixed(1)+","+y(i/(s.length-1)).toFixed(1);}
-  const gl=[0,0.25,0.5,0.75,1].map(p=>`<line x1="${M.l}" x2="${W-M.r}" y1="${y(p)}" y2="${y(p)}" stroke="var(--grid)"/>
-    <text x="${M.l-8}" y="${y(p)+4}" text-anchor="end" font-size="11" fill="var(--muted)">${p*100}%</text>`).join("");
-  const marks=[["P50",sim.p50],["P80",sim.p80]].map(([lb,v])=>`
-    <line x1="${x(v)}" x2="${x(v)}" y1="${M.t}" y2="${H-M.b}" stroke="var(--axis)" stroke-dasharray="4 3"/>
-    <text x="${x(v)+5}" y="${M.t+12}" font-size="11" font-weight="600" fill="var(--ink-2)">${lb} ${fmtM1(v)}</text>`).join("");
-  const ticks=[0,0.25,0.5,0.75,1].map(f=>{const v=min+f*(max-min);
-    return`<text x="${x(v)}" y="${H-M.b+18}" text-anchor="middle" font-size="11" fill="var(--muted)">${fmtM1(v)}</text>`;}).join("");
-  $("scurve").innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Cumulative probability of total cost">
-    ${gl}<line x1="${M.l}" x2="${W-M.r}" y1="${H-M.b}" y2="${H-M.b}" stroke="var(--axis)"/>
-    ${marks}<path d="${path}" fill="none" stroke="var(--blue)" stroke-width="2"/>
-    <rect id="s-hit" x="${M.l}" y="${M.t}" width="${W-M.l-M.r}" height="${H-M.t-M.b}" fill="transparent"/>
-    <line id="s-cross" x1="0" x2="0" y1="${M.t}" y2="${H-M.b}" stroke="var(--ink-2)" opacity="0"/>
-    ${ticks}</svg>`;
-  const svg=$("scurve").querySelector("svg"),cross=svg.querySelector("#s-cross"),tt=$("tt-s");
-  svg.querySelector("#s-hit").addEventListener("mousemove",e=>{
-    const r=svg.getBoundingClientRect();const px=(e.clientX-r.left)/r.width*W;
-    const v=min+(px-M.l)/(W-M.l-M.r)*(max-min);
-    let lo=0,hi=s.length-1;while(lo<hi){const m=(lo+hi)>>1;if(s[m]<v)lo=m+1;else hi=m;}
-    cross.setAttribute("x1",px);cross.setAttribute("x2",px);cross.setAttribute("opacity",1);
-    const cr=$("scurve-card").getBoundingClientRect();
-    tt.style.left=(e.clientX-cr.left)+"px";tt.style.top=(e.clientY-cr.top)+"px";
-    tt.textContent=`P${Math.round(lo/(s.length-1)*100)} · ${fmtM(v)}`;tt.style.opacity=1;});
-  svg.querySelector("#s-hit").addEventListener("mouseleave",()=>{tt.style.opacity=0;cross.setAttribute("opacity",0);});
-}
-function renderHist(sim){
-  const s=sim.sorted,min=s[0],max=s[s.length-1],BINS=36;
-  const counts=new Array(BINS).fill(0),bw=(max-min)/BINS;
-  s.forEach(v=>{counts[Math.min(BINS-1,Math.floor((v-min)/bw))]++;});
-  const peak=Math.max(...counts);
-  const Wh=520,Hh=230,m={l:14,r:14,t:14,b:30};
-  const bwpx=(Wh-m.l-m.r)/BINS;
-  const bars=counts.map((c,i)=>{
-    const h=c/peak*(Hh-m.t-m.b),x0=m.l+i*bwpx,v0=min+i*bw;
-    return`<rect x="${(x0+1).toFixed(1)}" y="${(Hh-m.b-h).toFixed(1)}" width="${(bwpx-2).toFixed(1)}" height="${h.toFixed(1)}" rx="2"
-      fill="${v0>=sim.p80?"var(--blue-soft)":"var(--blue)"}" data-i="${i}"/>`;}).join("");
-  const p80x=m.l+(sim.p80-min)/(max-min)*(Wh-m.l-m.r);
-  const ticks=[0,0.5,1].map(f=>{const v=min+f*(max-min);const xx=m.l+f*(Wh-m.l-m.r);
-    return`<text x="${xx}" y="${Hh-m.b+18}" text-anchor="${f===0?"start":f===1?"end":"middle"}" font-size="11" fill="var(--muted)">${fmtM1(v)}</text>`;}).join("");
-  $("hist").innerHTML=`<svg viewBox="0 0 ${Wh} ${Hh}" role="img" aria-label="Histogram of simulated total cost">
-    <line x1="${m.l}" x2="${Wh-m.r}" y1="${Hh-m.b}" y2="${Hh-m.b}" stroke="var(--axis)"/>
-    ${bars}<line x1="${p80x}" x2="${p80x}" y1="${m.t}" y2="${Hh-m.b}" stroke="var(--ink-2)" stroke-dasharray="4 3"/>
-    <text x="${p80x+5}" y="${m.t+11}" font-size="11" font-weight="600" fill="var(--ink-2)">P80</text>${ticks}</svg>`;
-  const tt=$("tt-h");
-  $("hist").querySelectorAll("rect[data-i]").forEach(rc=>{
-    rc.addEventListener("mousemove",e=>{
-      const i=+rc.dataset.i,v0=min+i*bw;
-      const cr=$("hist-card").getBoundingClientRect();
-      tt.style.left=(e.clientX-cr.left)+"px";tt.style.top=(e.clientY-cr.top)+"px";
-      tt.textContent=`${fmtM1(v0)}–${fmtM1(v0+bw)} · ${(counts[i]/sim.N*100).toFixed(1)}% of runs`;tt.style.opacity=1;});
-    rc.addEventListener("mouseleave",()=>tt.style.opacity=0);});
-}
-function renderTornado(sim){
-  const TOP=10;
-  const all=risks.map((r,k)=>({name:r.name,r:corr(sim.per[k],sim.totals)})).sort((a,b)=>Math.abs(b.r)-Math.abs(a.r));
-  const rows=all.slice(0,TOP);
-  const Wt=520,rowH=30,m={l:220,r:56,t:8,b:8},Ht=m.t+m.b+rows.length*rowH;
-  const maxr=Math.max(...rows.map(d=>Math.abs(d.r)),0.01);
-  const bars=rows.map((d,i)=>{
-    const y=m.t+i*rowH,w=Math.abs(d.r)/maxr*(Wt-m.l-m.r);
-    return`<text x="${m.l-10}" y="${y+rowH/2+4}" text-anchor="end" font-size="12" fill="var(--ink-2)">${esc(d.name.length>30?d.name.slice(0,29)+"…":d.name)}</text>
-      <rect x="${m.l}" y="${y+7}" width="${Math.max(2,w)}" height="${rowH-14}" rx="2" fill="var(--blue)" data-t="${esc(d.name)}: r = ${d.r.toFixed(2)}"/>
-      <text x="${m.l+w+6}" y="${y+rowH/2+4}" font-size="11.5" fill="var(--ink)">${d.r.toFixed(2)}</text>`;}).join("");
-  $("tornado").innerHTML=`<svg viewBox="0 0 ${Wt} ${Ht}" role="img" aria-label="Sensitivity of total cost to each risk">
-    <line x1="${m.l}" x2="${m.l}" y1="${m.t}" y2="${Ht-m.b}" stroke="var(--axis)"/>${bars}</svg>`;
-  $("torn-note").textContent=all.length>TOP?`Top ${TOP} of ${all.length} risks by correlation with total cost.`:"";
-  const tt=$("tt-t");
-  $("tornado").querySelectorAll("rect[data-t]").forEach(rc=>{
-    rc.addEventListener("mousemove",e=>{const cr=$("torn-card").getBoundingClientRect();
-      tt.style.left=(e.clientX-cr.left)+"px";tt.style.top=(e.clientY-cr.top)+"px";
-      tt.textContent=rc.dataset.t;tt.style.opacity=1;});
-    rc.addEventListener("mouseleave",()=>tt.style.opacity=0);});
-}
-
-/* ---------- Published evidence (real, cited outturn research) ---------- */
-const EVIDENCE=[
- {src:"Flyvbjerg, Budzier et al. 2022 (J. Mgmt Info Systems)",pop:"4,677 IT projects, 66 countries",stat:"Median overrun ≈ 0%; mean +80%; power-law tail (α≈2.3) — variance undefined",base:"approved budget",url:"https://arxiv.org/abs/2210.01573",tags:["ERP implementation","Data platform","Cloud migration","Custom build"]},
- {src:"— same study, ERP subset",pop:"1,612 ERP implementations",stat:"Median −10%; mean +30%",base:"approved budget",url:"https://arxiv.org/abs/2210.01573",tags:["ERP implementation"]},
- {src:"Flyvbjerg & Budzier 2011 (Harvard Business Review)",pop:"1,471 ICT projects",stat:"Mean +27%; 1 in 6 a black swan averaging +200% cost, +70% schedule",base:"approved budget",url:"https://arxiv.org/abs/1304.0265",tags:["ERP implementation","Data platform","Cloud migration","Custom build"]},
- {src:"McKinsey & Oxford 2012",pop:"5,400+ IT projects > US$15M",stat:"+45% cost, +7% schedule, −56% benefits",base:"approved budget",url:"https://www.mckinsey.com/capabilities/tech-and-ai/our-insights/delivering-large-scale-it-projects-on-time-on-budget-and-on-value",tags:["ERP implementation","Custom build"]},
- {src:"Panorama Consulting 2026 ERP Report",pop:"170 ERP implementations (self-reported)",stat:">25% of organisations over budget; ~25% over schedule",base:"expected budget",url:"https://www.panorama-consulting.com/resource-center/erp-report/",tags:["ERP implementation"]},
- {src:"WA Auditor-General 2025 — Major IT Projects",pop:"10 major WA government IT projects",stat:"≥62% over original budgets in aggregate; 5 of 10 at least doubled",base:"original approved",url:"https://audit.wa.gov.au/reports-and-publications/reports/2025-transparency-report-major-it-projects/",tags:["ERP implementation","Data platform","Cloud migration","Custom build"]},
- {src:"VAGO 2015 — Victorian ICT dashboard",pop:"1,249 government ICT projects",stat:"~35% over budget; overruns of 11–649% among those",base:"initial budget",url:"https://www.audit.vic.gov.au/report/digital-dashboard-status-review-ict-projects-and-initiatives",tags:["ERP implementation","Data platform","Cloud migration","Custom build"]},
- {src:"Flyvbjerg, Holm & Buhl 2002 (J. American Planning Assoc.)",pop:"258 transport projects, 20 nations, ~US$90B",stat:"Mean escalation: rail +44.7%, fixed links +33.8%, roads +20.4%; 9 of 10 projects over; no improvement in 70 years",base:"decision to build",url:"https://arxiv.org/pdf/1303.6604",tags:["Road / highway","Rail / transit"]},
- {src:"Flyvbjerg & Gardner 2023 — 16,000-project database",pop:"16,000+ projects, 136 countries (secondary summaries)",stat:"Mean overrun / share in fat tail: buildings +62% / 39%, rail +39% / 28%, tunnels +37% / 28%; only 8.5% of all projects on budget AND on time",base:"decision to build, real terms",url:"https://budgetoverrun.com/studies/flyvbjerg-megaproject-database",tags:["Rail / transit","Buildings / precinct"]},
- {src:"Grattan Institute 2020 — transport megaprojects",pop:"Australian transport projects ≥ $20M since 2001",stat:"+21% average vs first-announced ($34B total); 80% of overrun from 14% of projects; megaprojects >$1B overran ~30%",base:"first announcement",url:"https://grattan.edu.au/report/the-rise-of-megaprojects-counting-the-costs/",tags:["Road / highway","Rail / transit","Buildings / precinct"]},
- {src:"Tail case — Queensland Health payroll",pop:"single government core-system project",stat:"$6.19M contract → ~$1.25B total cost (~200×)",base:"original contract",url:"https://www.itnews.com.au/news/qld-health-payroll-bungle-to-cost-125-billion-303888",tags:[]},
-];
-const EV_HEADLINES={
- "ERP implementation":"Closest published class for this project: the ERP subset of Flyvbjerg et al. 2022 — 1,612 implementations, median outturn −10% of budget but mean +30%, with the loss concentrated in a fat tail.",
- "Data platform":"No published class exists at 'data platform' grain — the closest is IT projects broadly: median ≈ 0% overrun, mean +27% to +80%, one in six a black swan.",
- "Cloud migration":"No published class exists at 'cloud migration' grain — the closest is IT projects broadly: median ≈ 0% overrun, mean +27% to +80%, one in six a black swan.",
- "Custom build":"Closest published classes: IT projects broadly (median ≈ 0%, mean +27–80%) and large builds via McKinsey–Oxford (+45% cost, −56% benefits).",
- "Road / highway":"Roads are the best-behaved transport class in the literature — +20.4% mean escalation (Flyvbjerg 2002, n=258) and +21% vs first-announced across Australian transport (Grattan 2020) — but the overrun is concentrated: 80% of it comes from 14% of projects.",
- "Rail / transit":"Rail is the worst-documented-performing transport class: +44.7% mean escalation (Flyvbjerg 2002, n=258); the 2023 database shows +39% mean with 28% of projects in the fat tail. Australian megaprojects >$1B overran ~30% (Grattan 2020).",
- "Buildings / precinct":"Buildings run +62% mean overrun with 39% of projects in the fat tail (Flyvbjerg & Gardner 2023 database, secondary) — a wider tail share than rail; Grattan's +21% Australian transport average is the local context.",
-};
-function renderEvidence(proj){
-  $("ev-headline").textContent=EV_HEADLINES[proj.type]||"";
-  $("ev-table").innerHTML=`<thead><tr><th>Source</th><th>Population</th><th>Finding</th><th>Baseline</th></tr></thead>
-    <tbody>${EVIDENCE.map(e=>{
-      const rel=e.tags.includes(proj.type);
-      return`<tr${rel?' style="font-weight:600"':''}><td><a href="${e.url}" target="_blank" rel="noopener" style="color:var(--blue-deep)">${e.src}</a></td>
-        <td>${e.pop}</td><td>${e.stat}</td><td>${e.base}</td></tr>`;}).join("")}</tbody>`;
-}
-
-/* ---------- Calibration sources panels ---------- */
-function renderSources(proj){
-  const top=matches(proj).slice(0,6);
-  const usable=top.filter(p=>p.type===proj.type&&p.score>=45).length;
-  $("org-table").innerHTML=`<thead><tr><th>Project</th><th>Type</th><th class="num">Base</th><th class="num">Overrun</th><th class="num">Similarity</th></tr></thead>
-    <tbody>${top.map(p=>{const lvl=p.score>=70?"High":p.score>=45?"Medium":"Low";
-      return`<tr><td>${p.name}</td><td>${p.type}</td><td class="num">$${p.size.toFixed(1)}M</td>
-        <td class="num over-pos">+${p.overrun}%</td><td class="num ${lvl==="High"?"sim-hi":""}">${lvl} · ${p.score}</td></tr>`;}).join("")}</tbody>`;
-  $("org-note").textContent=usable>=4
-    ?`${usable} projects are similar enough (score ≥ 45) to calibrate from your own history — the strongest evidence available.`
-    :`Only ${usable} sufficiently similar project(s) in your history — calibration will fall back to the industry benchmark for most categories.`;
-  const ind=INDUSTRY[proj.type];
-  $("ind-sub").textContent=`${proj.type} programmes — cost consumed per risk category, % of base estimate (illustrative sample; see cited evidence below for real whole-of-project outturns).`;
-  $("ind-table").innerHTML=`<thead><tr><th>Category</th><th class="num">Median</th><th class="num">P90</th><th class="num">Material in</th><th class="num">n</th></tr></thead>
-    <tbody>${Object.entries(ind).map(([k,v])=>`<tr><td>${CATS[k]}</td><td class="num">${v.p50.toFixed(1)}%</td>
-      <td class="num">${v.p90.toFixed(1)}%</td><td class="num">${Math.round(v.freq*100)}% of projects</td><td class="num">${v.n}</td></tr>`).join("")}</tbody>`;
-}
-
-/* ---------- AI calibration panel ---------- */
-function showCal(ids){
-  const proj=project(),panel=$("ai-panel"),body=$("ai-body");
-  const N=Math.min(5000,+$("iters").value);
-  body.innerHTML="";
-  const CAP=8;
-  let list=ids.map(id=>risks.find(x=>x.id===id)).filter(Boolean);
-  const total=list.length;
-  const capped=total>CAP;
-  if(capped)list=list.sort((a,b)=>(b.mode*(b.kind==="event"?b.prob:1))-(a.mode*(a.kind==="event"?a.prob:1))).slice(0,CAP);
-  const rho=curRho();
-  const baseP80=simulate(risks,proj.base,N,42,rho).p80;
-  let any=false;
-  list.forEach(r=>{
-    const s=suggestFor(r,proj);if(!s)return;any=true;
-    const trial=risks.map(x=>x.id===r.id?{...x,min:s.sugg.min,mode:s.sugg.mode,max:s.sugg.max,prob:s.prob}:x);
-    const d=simulate(trial,proj.base,N,42,rho).p80-baseP80;
-    const div=document.createElement("div");div.className="ai-sugg";
-    div.innerHTML=`<div style="font-weight:650;">${esc(r.name)}<span class="src-chip">source: ${s.src}</span></div>
-      <div class="narrative">${s.narrative}</div>
-      <table class="cmp"><tr><th></th><th>Min</th><th>Likely</th><th>Max</th>${r.kind==="event"?"<th>P(occur)</th>":""}</tr>
-      <tr><td>Current</td><td>${r.min.toFixed(2)}</td><td>${r.mode.toFixed(2)}</td><td>${r.max.toFixed(2)}</td>${r.kind==="event"?`<td>${r.prob.toFixed(2)}</td>`:""}</tr>
-      <tr class="sugg"><td>✦ Suggested</td><td>${s.sugg.min.toFixed(2)}</td><td>${s.sugg.mode.toFixed(2)}</td><td>${s.sugg.max.toFixed(2)}</td>${r.kind==="event"?`<td>${s.prob.toFixed(2)}</td>`:""}</tr></table>
-      <div class="delta">Accepting moves P80 by <b>${d>=0?"+":"−"}${fmtM(Math.abs(d)).slice(1)}</b></div>
-      <div style="display:flex;gap:8px;">
-        <button class="primary" data-acc="${r.id}">Accept</button>
-        <button data-dis="${r.id}">Keep mine</button></div>`;
-    body.appendChild(div);
-  });
-  $("ai-note").textContent=capped&&any?`Showing the ${body.children.length} most material of ${total} risks with reference data — calibrate the rest individually from the register.`:"";
-  if(!any)body.innerHTML=`<p style="font-size:13px;grid-column:1/-1;">No reference data available for the selected risk(s) — risks in category "Other" have no benchmark, and your history has too few similar projects.</p>`;
-  panel.hidden=false;panel.scrollIntoView({behavior:"smooth",block:"nearest"});
-  body.querySelectorAll("[data-acc]").forEach(b=>b.addEventListener("click",()=>{
-    const r=risks.find(x=>x.id==+b.dataset.acc);const s=suggestFor(r,project());
-    Object.assign(r,{min:s.sugg.min,mode:s.sugg.mode,max:s.sugg.max,prob:s.prob,cal:true});
-    b.closest(".ai-sugg").remove();if(!body.children.length)panel.hidden=true;
-    renderRegister();run();}));
-  body.querySelectorAll("[data-dis]").forEach(b=>b.addEventListener("click",()=>{
-    b.closest(".ai-sugg").remove();if(!body.children.length)panel.hidden=true;}));
-}
-$("cal-all").addEventListener("click",()=>showCal(risks.map(r=>r.id)));
-
-/* ---------- Orchestration ---------- */
-const curRho=()=>parseFloat($("corr").value)||0;
-function run(){
-  const proj=project(),N=+$("iters").value;
-  SIM=simulate(risks,proj.base,N,42,curRho());
-  renderTiles(SIM,proj);renderScurve(SIM);renderHist(SIM);renderTornado(SIM);renderSources(proj);renderEvidence(proj);
-}
-$("rerun").addEventListener("click",run);
-["pname","psector","ptype","pbase","iters","corr"].forEach(id=>$(id).addEventListener("input",debounce(run,300)));
-renderRegister();run();
-</script>
 <section class="section" id="pricing">
   <h2>Pricing</h2>
-  <p class="s-sub">Launch pricing — pilot places by invitation while early access runs. All prices AUD, ex GST, subject to change.</p>
+  <p class="s-sub">Launch pricing — early access by invitation. All prices AUD, ex GST, subject to change.</p>
   <div class="tiers">
     <div class="tier">
-      <h3>Explorer</h3>
-      <div class="price">Free</div>
-      <div class="per">in-browser demo · no account</div>
+      <h3>Free</h3>
+      <div class="price">$0</div>
+      <div class="per">sign-up required (Google sign-in)</div>
       <ul>
-        <li>Full simulation engine, in your browser</li>
-        <li>Import your own register from Excel</li>
-        <li>Published-evidence calibration (sample classes)</li>
-        <li>Nothing you load leaves your machine</li>
+        <li>Your own risk registers and simulations</li>
+        <li>On-screen results: S-curve, percentiles, drivers</li>
+        <li>Calibration against published evidence</li>
+        <li class="no">No report or workbook export</li>
+        <li class="no">No delivery-history calibration</li>
       </ul>
-      <a class="cta ghost" href="#demo">Use it now</a>
+      <a class="cta ghost" href="#contact">Join the early-access list</a>
     </div>
     <div class="tier feat">
       <h3>Team</h3>
       <div class="price">$200</div>
       <div class="per">per user / month + $1,000 / month workspace</div>
       <ul>
-        <li>Google sign-in · your own secure workspace</li>
+        <li>Everything in Free, plus:</li>
         <li>AI calibration from your organisation's delivery history</li>
-        <li>Auditable basis of estimate · QRA report export</li>
-        <li>Free read-only reviewer links — no licence needed</li>
-        <li>Saved projects, registers and runs</li>
+        <li>Auditable basis of estimate · QRA report export (DOCX)</li>
+        <li>Excel round-trip · free read-only reviewer links</li>
       </ul>
       <a class="cta primary" href="#contact">Request early access</a>
     </div>
@@ -1187,23 +214,83 @@ renderRegister();run();
     <p>Early access is open to a small number of teams with a live business case.
        Tell us about your project and we'll come back within two business days.</p>
     <a class="cta primary" href="mailto:edwardkwanhungchan@gmail.com?subject=Antedata%20—%20early%20access&body=Organisation%3A%0AProject%20type%3A%0AWhen%20you%20need%20a%20P50%2FP90%3A%0A">Email us — early access</a>
-    <p style="margin-top:14px;font-size:12px;color:var(--muted)">Sign-in with Google arrives with the full web app — registering interest now reserves your place.</p>
+    <p style="margin-top:14px;font-size:12px;color:var(--muted)">Google sign-in arrives with the web app — registering interest now reserves your place.</p>
   </div>
 </section>
 
 <div class="disclaimer" id="disclaimer">
-  <b>Disclaimer.</b> Antedata provides quantitative decision support. Outputs are estimates
-  that depend on the quality of inputs and reference data, and do not constitute professional,
-  financial or engineering advice; responsibility for estimates, contingency decisions and
-  submissions remains with the user and their advisers. The demonstration above uses
-  illustrative sample data; published statistics are cited with their baselines. To the extent
-  permitted by law, Antedata accepts no liability for decisions made in reliance on outputs.
-  Demo imports are processed entirely in your browser and are not transmitted or stored.
+  <b>Disclaimer.</b> Antedata provides quantitative decision support. The calculator above shows
+  indicative ranges derived from cited published research on completed projects; it is not a
+  probabilistic estimate of any specific project and does not constitute professional, financial
+  or engineering advice. Responsibility for estimates, contingency decisions and submissions
+  remains with the user and their advisers. To the extent permitted by law, Antedata accepts no
+  liability for decisions made in reliance on outputs. The calculator runs entirely in your
+  browser; nothing you enter is transmitted or stored.
 </div>
 
 <footer class="site">
   Antedata — AI-driven, new-generation quantitative risk software · <a href="#pricing">Pricing</a> ·
   <a href="#contact">Contact</a> · <a href="#disclaimer">Disclaimer</a> · © 2026 Antedata
 </footer>
+
+<script>
+"use strict";
+/* Indicative multipliers of base cost, derived from published research on
+   completed projects (see citations). Teaser only — labelled as such. */
+const CLASSES = {
+  erp:  { m: [0.95, 1.18, 1.32], read: "ERP implementations: the median project in the research finished close to budget, but the mean overrun was about +30% — the gap is the fat tail.",
+          cite: "Derived from Flyvbjerg, Budzier et al. 2022 (ERP subset, n=1,612: median −10%, mean +30%) and Panorama Consulting 2026." },
+  it:   { m: [1.00, 1.27, 1.47], read: "IT and digital projects: median overrun near 0%, mean +27–80%; roughly one in six projects lands in a tail averaging +200%.",
+          cite: "Derived from Flyvbjerg, Budzier et al. 2022 (n=4,677) and Flyvbjerg & Budzier 2011, HBR (n=1,471)." },
+  road: { m: [1.05, 1.20, 1.33], read: "Roads are the best-behaved transport class in the research — but most of the overrun sits in a small share of projects.",
+          cite: "Derived from Flyvbjerg, Holm & Buhl 2002 (roads +20.4% mean, n=258) and Grattan Institute 2020 (+21% vs first-announced)." },
+  rail: { m: [1.10, 1.35, 1.58], read: "Rail and transit: the worst-performing documented transport class — +45% mean escalation in the classic study; 28% of projects in the fat tail.",
+          cite: "Derived from Flyvbjerg, Holm & Buhl 2002 (rail +44.7%, n=258) and the 2023 Flyvbjerg database (rail +39% mean / 28% tail)." },
+  bld:  { m: [1.05, 1.34, 1.60], read: "Buildings carry a wider tail share than rail — +62% mean overrun with 39% of projects in the fat tail.",
+          cite: "Derived from the Flyvbjerg & Gardner 2023 database (buildings +62% mean / 39% tail share; secondary summaries)." },
+};
+const $ = id => document.getElementById(id);
+const fmt = v => v >= 1000 ? "$" + (v/1000).toFixed(2) + "B" : "$" + v.toFixed(v < 10 ? 1 : 0) + "M";
+
+function drawCurve(m, base) {
+  // control points (p, multiplier): smooth indicative cumulative curve
+  const pts = [[0.05, Math.max(0.75, m[0] - 1.6*(m[1]-m[0]))], [0.5, m[0]], [0.8, m[1]], [0.9, m[2]], [0.99, m[2] + 1.5*(m[2]-m[1])]];
+  const xs = pts.map(p => p[1]*base), min = xs[0], max = xs[xs.length-1];
+  const W = 640, H = 120, L = 46, R = 14, T = 10, B = 26;
+  const X = v => L + (v - min) / (max - min) * (W - L - R);
+  const Y = p => H - B - p * (H - T - B);
+  let d = "";
+  for (let p = 0.05; p <= 0.99; p += 0.01) {
+    // monotone piecewise-linear interpolation in quantile space
+    let i = 0; while (i < pts.length - 2 && p > pts[i+1][0]) i++;
+    const [p0, m0] = pts[i], [p1, m1] = pts[i+1];
+    const v = (m0 + (m1 - m0) * (p - p0) / (p1 - p0)) * base;
+    d += (d ? "L" : "M") + X(v).toFixed(1) + "," + Y(p).toFixed(1);
+  }
+  const marks = [[0.5, m[0]], [0.8, m[1]], [0.9, m[2]]].map(([p, mu]) =>
+    `<line x1="${X(mu*base)}" x2="${X(mu*base)}" y1="${T}" y2="${H-B}" stroke="var(--grid)" stroke-dasharray="3 3"/>` +
+    `<text x="${X(mu*base)}" y="${H-B+16}" text-anchor="middle" font-size="10" fill="var(--muted)">P${p*100}</text>`).join("");
+  $("curve").innerHTML =
+    `<line x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}" stroke="var(--grid)"/>` +
+    `<text x="${L-6}" y="${Y(0)+4}" text-anchor="end" font-size="10" fill="var(--muted)">0%</text>` +
+    `<text x="${L-6}" y="${Y(1)+4}" text-anchor="end" font-size="10" fill="var(--muted)">100%</text>` +
+    marks + `<path d="${d}" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round"/>`;
+}
+
+function calc() {
+  const c = CLASSES[$("ctype").value];
+  const base = Math.max(1, parseFloat($("cbase").value) || 50);
+  const [p50, p80, p90] = c.m.map(x => x * base);
+  $("r50").textContent = fmt(p50); $("d50").textContent = (c.m[0] >= 1 ? "+" : "−") + Math.abs((c.m[0]-1)*100).toFixed(0) + "% vs base";
+  $("r80").textContent = fmt(p80); $("d80").textContent = "+" + ((c.m[1]-1)*100).toFixed(0) + "% vs base";
+  $("r90").textContent = fmt(p90); $("d90").textContent = "+" + ((c.m[2]-1)*100).toFixed(0) + "% vs base";
+  $("read").textContent = c.read;
+  $("cite").textContent = c.cite + " Indicative multipliers for illustration — not a probabilistic estimate of your project.";
+  drawCurve(c.m, base);
+}
+$("ctype").addEventListener("input", calc);
+$("cbase").addEventListener("input", calc);
+calc();
+</script>
 </body>
 </html>
